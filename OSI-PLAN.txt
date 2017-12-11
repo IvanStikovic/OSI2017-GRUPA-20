@@ -1,0 +1,19 @@
+
+* struktura RADNIK (Username,Pin,OSOBA,radno mjesto)
+
+* struktura OSOBA (Prezime,Ime,Plata) //nalazice se u strukturi RADNIK
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
