@@ -4,7 +4,7 @@ void obrisiRadnika(RADNIK**r)
 {
 
     free((*r)->username);
-    obrisiOsobu(&((*r)->o));
+    obrisiOsobu(&((*r)->osoba));
     free(*r);
 }
 
@@ -29,11 +29,11 @@ RADNIK* kreirajRadnika()
     return pom;
 }
 
-ispisiRadnika(RADNIK *r)
+void ispisiRadnika(RADNIK *r)
 {
 
     printf("%s",r->username);
     printf("%s",r->pin);
-    printf("%s",r->radno_mjesto);
+    printf("%c",r->radno_mjesto);
     ispisiOsobu(r->osoba);
 }

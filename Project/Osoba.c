@@ -25,7 +25,7 @@ void ispisiOsobu(OSOBA* o)
 
 OSOBA* kreirajOsobu()
 {
-    OSOBA *o
+    OSOBA *o;
     o=(OSOBA*)malloc(sizeof(OSOBA));
         ucitajOsobu(o);
 
