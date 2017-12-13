@@ -33,16 +33,17 @@
 		</Compiler>
 		<Unit filename="Osoba.c">
 			<Option compilerVar="CC" />
-			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="Osoba.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="Osoba.h" />
 		<Unit filename="Radnik.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Radnik.h" />
+		<Unit filename="Sistem.c">
 			<Option compilerVar="CC" />
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="Radnik.h">
+		<Unit filename="Sistem.h">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
 		<Unit filename="main.c">
