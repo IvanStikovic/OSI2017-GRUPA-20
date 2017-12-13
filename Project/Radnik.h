@@ -13,6 +13,6 @@ typedef struct radnik
 RADNIK* kreirajRadnika(); //JELA
 void ucitajRadnika(RADNIK*); //PRIKA
 void ispisiRadnika(RADNIK*);//JELA
-void obrisiRadnika(RADNIK*);//DANE
+void obrisiRadnika(RADNIK**);//TREBA PROVJERITI
 
 #endif // RADNIK_H_INCLUDED

@@ -22,3 +22,12 @@ void ispisiOsobu(OSOBA* o)
     printf("\n%s",o->prezime);
     printf("\n%lf",o->plata);
 }
+
+OSOBA* kreirajOsobu()
+{
+    OSOBA *o
+    o=(OSOBA*)malloc(sizeof(OSOBA));
+        ucitajOsobu(o);
+
+    return o;
+}

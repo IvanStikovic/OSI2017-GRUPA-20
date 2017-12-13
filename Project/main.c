@@ -8,5 +8,6 @@ int main()
     OSOBA *o=(OSOBA*)malloc(sizeof(OSOBA));
     ucitajOsobu(o);
     ispisiOsobu(o);
+    o=kreirajOsobu();
     return 0;
 }

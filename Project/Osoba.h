@@ -11,7 +11,7 @@ typedef struct osoba
     double plata;
 } OSOBA;
 
-OSOBA* kreirajOsobu();// DANE
+OSOBA* kreirajOsobu();// TREBA PROVJERITI!!!!
 void ucitajOsobu(OSOBA*);
 void ispisiOsobu(OSOBA*);
 void obrisiOsobu(OSOBA**);//PRIKA
