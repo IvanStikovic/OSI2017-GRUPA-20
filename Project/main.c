@@ -6,9 +6,5 @@
 
 int main()
 {
-    RADNIK *r=kreirajRadnika();
-    ispisiRadnika(r);
-    obrisiRadnika(r);
-
     return 0;
 }
