@@ -1,11 +1,11 @@
 #include "Radnik.h"
 
-void obrisiRadnika(RADNIK**r)
+void obrisiRadnika(RADNIK*r)
 {
 
-    free((*r)->username);
-    obrisiOsobu(&((*r)->osoba));
-    free(*r);
+    free(r->username);
+    obrisiOsobu(r->osoba);
+    free(r);
 }
 
 void ucitajRadnika(RADNIK *r)
@@ -18,22 +18,23 @@ void ucitajRadnika(RADNIK *r)
     printf("PIN:");
     scanf("%s", r->pin);
     printf("Radno mjesto:");
-    scanf("%c", &r->radno_mjesto);
+    scanf(" %c", &r->radno_mjesto);
     r->osoba=kreirajOsobu();
 }
 
 RADNIK* kreirajRadnika()
 {
-    RADNIK*pom;
+    RADNIK* pom;
     pom=(RADNIK*)malloc(sizeof(RADNIK));
+    ucitajRadnika(pom);
     return pom;
 }
 
 void ispisiRadnika(RADNIK *r)
 {
 
-    printf("%s",r->username);
-    printf("%s",r->pin);
-    printf("%c",r->radno_mjesto);
+    printf("%s\n",r->username);
+    printf("%s\n",r->pin);
+    printf("%c\n",r->radno_mjesto);
     ispisiOsobu(r->osoba);
 }

@@ -12,7 +12,7 @@ void ucitajOsobu(OSOBA* o)
     scanf("%s",pom1);
     o->prezime=(char*)calloc(strlen(pom1)+1,sizeof(char));
     strcpy(o->prezime,pom1);
-    printf("\nUnesite platu:");
+    printf("Unesite platu:");
     scanf("%lf",&o->plata);
 }
 
@@ -20,7 +20,7 @@ void ispisiOsobu(OSOBA* o)
 {
     printf("\n%s",o->ime);
     printf("\n%s",o->prezime);
-    printf("\n%lf",o->plata);
+    printf("\n%.3lf",o->plata);
 }
 
 OSOBA* kreirajOsobu()
@@ -32,9 +32,9 @@ OSOBA* kreirajOsobu()
     return o;
 }
 
-void obrisiOsobu(OSOBA** o)
+void obrisiOsobu(OSOBA* o)
 {
-    free((*o)->ime);
-    free((*o)->prezime);
+    free(o->ime);
+    free(o->prezime);
     free(o);
 }

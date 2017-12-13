@@ -14,7 +14,7 @@ typedef struct osoba
 OSOBA* kreirajOsobu();// TREBA PROVJERITI!!!!
 void ucitajOsobu(OSOBA*);
 void ispisiOsobu(OSOBA*);
-void obrisiOsobu(OSOBA**);//PRIKA
+void obrisiOsobu(OSOBA*);//PRIKA
 
 
 #endif // OSOBA_H_INCLUDED

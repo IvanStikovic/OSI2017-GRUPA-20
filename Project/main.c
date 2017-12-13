@@ -5,9 +5,8 @@
 
 int main()
 {
-    OSOBA *o=(OSOBA*)malloc(sizeof(OSOBA));
-    ucitajOsobu(o);
-    ispisiOsobu(o);
-    o=kreirajOsobu();
+    RADNIK *r=kreirajRadnika();
+    ispisiRadnika(r);
+    obrisiRadnika(r);
     return 0;
 }

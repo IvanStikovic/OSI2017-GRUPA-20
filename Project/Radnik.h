@@ -5,7 +5,7 @@
 typedef struct radnik
 {
     char* username;
-    char pin[4];
+    char pin[5];
     char radno_mjesto;
     OSOBA* osoba;
 } RADNIK;
@@ -13,6 +13,6 @@ typedef struct radnik
 RADNIK* kreirajRadnika(); //JELA
 void ucitajRadnika(RADNIK*); //PRIKA
 void ispisiRadnika(RADNIK*);//JELA
-void obrisiRadnika(RADNIK**);//TREBA PROVJERITI
+void obrisiRadnika(RADNIK*);//TREBA PROVJERITI
 
 #endif // RADNIK_H_INCLUDED
