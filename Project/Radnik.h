@@ -10,9 +10,9 @@ typedef struct radnik
     OSOBA* osoba;
 } RADNIK;
 
-RADNIK* kreirajRadnika(); //JELA
-void ucitajRadnika(RADNIK*); //PRIKA
-void ispisiRadnika(RADNIK*);//JELA
-void obrisiRadnika(RADNIK*);//TREBA PROVJERITI
+RADNIK* kreirajRadnika();
+void ucitajRadnika(RADNIK*);
+void ispisiRadnika(RADNIK*);
+void obrisiRadnika(RADNIK*);
 
 #endif // RADNIK_H_INCLUDED

@@ -17,7 +17,7 @@ void ucitajRadnika(RADNIK *r)
     strcpy(r->username,pom);
     printf("PIN:");
     scanf("%s", r->pin);
-    printf("Radno mjesto:");
+    printf("Radno mjesto (a ili r):");
     scanf(" %c", &r->radno_mjesto);
     r->osoba=kreirajOsobu();
 }
