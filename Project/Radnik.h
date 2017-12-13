@@ -7,8 +7,12 @@ typedef struct radnik
     char* username;
     char pin[4];
     char radno_mjesto;
-    OSOBA osoba;
+    OSOBA* osoba;
 } RADNIK;
 
+RADNIK* kreirajRadnika(); //JELA
+void ucitajRadnika(RADNIK*); //PRIKA
+void ispisiRadnika(RADNIK*);//JELA
+void obrisiRadnika(RADNIK*);//DANE
 
 #endif // RADNIK_H_INCLUDED
