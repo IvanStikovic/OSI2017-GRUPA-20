@@ -31,3 +31,10 @@ OSOBA* kreirajOsobu()
 
     return o;
 }
+
+void obrisiOsobu(OSOBA** o)
+{
+    free((*o)->ime);
+    free((*o)->prezime);
+    free(o);
+}
