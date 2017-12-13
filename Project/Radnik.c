@@ -21,3 +21,19 @@ void ucitajRadnika(RADNIK *r)
     scanf("%c", &r->radno_mjesto);
     r->osoba=kreirajOsobu();
 }
+
+RADNIK* kreirajRadnika()
+{
+    RADNIK*pom;
+    pom=(RADNIK*)malloc(sizeof(RADNIK));
+    return pom;
+}
+
+ispisiRadnika(RADNIK *r)
+{
+
+    printf("%s",r->username);
+    printf("%s",r->pin);
+    printf("%s",r->radno_mjesto);
+    ispisiOsobu(r->osoba);
+}
