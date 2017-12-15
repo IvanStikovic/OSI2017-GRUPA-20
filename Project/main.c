@@ -6,6 +6,5 @@
 
 int main()
 {
-    dodajNalog();
     return 0;
 }

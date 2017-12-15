@@ -79,11 +79,10 @@ void dodajNalog()
     strcpy(novi->username,username);
     printf("Unesite PIN za radnika(4 CIFRE):");
     scanf("%s",novi->pin);
+    getchar();
     printf("Da li zaposleni ima privilegije administratora(a), ili analiticara(r):");
     scanf("%c",&novi->radno_mjesto);
     novi->osoba= nova;
-    free(nova->ime);
-    free(nova->prezime);
     sacuvajNalog(novi);  //FUNKCIJA KOJA DODAJE RADNIKA U DATOTEKU
     oslobodi(novi);    //FUNKCIJA KOJA DEALOCIRA SVE DIJELOVE RADNIKA
     return;
