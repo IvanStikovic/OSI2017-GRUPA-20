@@ -16,7 +16,7 @@ bool login()
     {
     printf("Unesite username :");
     char username[20],sifra[20];
-    scanf("%s",pom);
+    scanf("%s",username);
     printf("\nUnesite sifru :");
     scanf("%s",sifra);
     if(provjeriNalog(username,sifra))
@@ -31,3 +31,4 @@ bool login()
     }while(c);
     return false;
 }
+

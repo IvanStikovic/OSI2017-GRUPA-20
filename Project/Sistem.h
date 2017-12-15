@@ -21,6 +21,7 @@ void optionMenu();
 
 ////GRAFICKI INTERFEJS
 void loading();
+
             //zvjezdice pri unosu sifre
 
 

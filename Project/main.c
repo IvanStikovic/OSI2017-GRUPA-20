@@ -6,5 +6,6 @@
 
 int main()
 {
+    load();
     return 0;
 }
