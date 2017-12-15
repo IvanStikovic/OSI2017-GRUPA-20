@@ -57,4 +57,58 @@ bool provjeriNalog(char* usrnm ,char* sfr)
 
 }
 
+//FUNKCIJA ZA DODAVANJE NALOGA U DATOTEKU BY #RENE
+void dodajNalog()
+{
+    char ime[20], prezime[20],username[20];
+    OSOBA *nova = (OSOBA*)malloc(sizeof(OSOBA));
+    RADNIK *novi = (RADNIK*)malloc(sizeof(RADNIK));
+    printf("Unesite ime radnika:");
+    scanf("%s",ime);
+    printf("Unesite prezime radnika:");
+    scanf("%s",prezime);
+    printf("Unesite platu:");
+    scanf("%lf",&nova->plata);
+    nova->ime=(char*)calloc(sizeof(ime)+1, sizeof(char));
+    nova->prezime = (char*)calloc(sizeof(prezime)+1, sizeof(char));
+    strcpy(nova->ime,ime);
+    strcpy(nova->prezime,prezime);
+    printf("Unesite username za radnika:");
+    scanf("%s",username);
+    novi->username=(char*)calloc(sizeof(username)+1, sizeof(char));
+    strcpy(novi->username,username);
+    printf("Unesite PIN za radnika(4 CIFRE):");
+    scanf("%s",novi->pin);
+    printf("Da li zaposleni ima privilegije administratora(a), ili analiticara(r):");
+    scanf("%c",&novi->radno_mjesto);
+    novi->osoba= nova;
+    free(nova->ime);
+    free(nova->prezime);
+    sacuvajNalog(novi);  //FUNKCIJA KOJA DODAJE RADNIKA U DATOTEKU
+    oslobodi(novi);    //FUNKCIJA KOJA DEALOCIRA SVE DIJELOVE RADNIKA
+    return;
+}
+
+void oslobodi(RADNIK *rad)
+{
+
+    free(rad->osoba->ime);
+    free(rad->osoba->prezime);
+    free(rad->username);
+}
+
+void sacuvajNalog(RADNIK *rad)
+{
+    FILE *dat;
+    if(dat = fopen("RADNICI.TXT","r"))
+    {
+        fprintf(dat,"%s %s %lf %s %s %c\n",rad->osoba->ime, rad->osoba->prezime, rad->osoba->plata, rad->username, rad->pin, rad->radno_mjesto);
+        printf("Nalog je uspjesno kreiran i sacuvan!\n");
+        fclose(dat);
+        return;
+    }
+    else
+        printf("Nalog nije uspjesno kreiran i sacuvan, greska prilikom cuvanja naloga u bazi.\n");
+}
+
 
