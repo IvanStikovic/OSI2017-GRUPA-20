@@ -38,3 +38,4 @@ void ispisiRadnika(RADNIK *r)
     printf("%c\n",r->radno_mjesto);
     ispisiOsobu(r->osoba);
 }
+
