@@ -114,21 +114,33 @@ void sacuvajNalog(RADNIK *rad)
 void azurirajNalog()
 {
     FILE *dat;
-    int br_radnika=1,provjera;
+    int br_radnika,provjera,i=0;
     char pom[20],ime[20],prezime[20],username[20],pin[5],radno_mjesto;
     double plata;
+    RADNIK *radnici;
+
     printf("Unesite username naloga koji zelite da azurirate!\n");
     scanf("%s",pom);
-    if(dat=fopen("RADNICI.txt","r"))
+    br_radnika=brojRadnika();
+    radnici=(RADNIK*)calloc(br_radnika,sizeof(RADNIK));
+    if(dat=fopen("RADNICI.txt","r")
     {
-        provjera=fscanf(dat,"%s %s %lf %s %s %c",ime,prezime,&plata,username,pin,&radno_mjesto);
-        while(provjera==6)
+        for(i=0;i<br_radnika;i++)
         {
             provjera=fscanf(dat,"%s %s %lf %s %s %c",ime,prezime,&plata,username,pin,&radno_mjesto);
-            br_radnika++;
+            if(provjera==6)
+                {
+                    strcpy(radnici[i]->osoba->ime,ime);
+                    strcpy(radnici[i]->osoba->prezime,prezime);
+                    radnici[i]->osoba->plata=plata;
+                    strcpy(radnici[i]->username,username)
+                    strcpy(radnici[i]->pin,pin);
+                    radnici[i]->radno_mjesto=radno_mjesto;
+                }
         }
         fclose(dat);
-    }// NEDOVRSENO NASTAVLJAM SUTRA
+    }
+
 }//#ByIgorS
 
 void optionMeni(char c)
@@ -175,4 +187,25 @@ void radnikMeni()
         }
     }while(c)
     izlazGrafika();
+}
+
+int brojRadnika()
+{
+    FILE *fp;
+    int br=0,p;
+    double plata;
+    char pom[20],ime[20],prezime[20],username[20],pin[5],radno_mjesto;
+    if(fp=fopen("RADNICI.txt","r"))
+    {
+        p=fscanf(fp,"%s %s %lf %s %s %c",ime,prezime,&plata,username,pin,&radno_mjesto);
+        if(p==6)
+            br++;
+        while(p==6)
+        {
+            p=fscanf(fp,"%s %s %lf %s %s %c",ime,prezime,&plata,username,pin,&radno_mjesto);
+            br++;
+        }
+        fclose(fp);
+    }
+    return br;
 }
