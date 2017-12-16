@@ -1,17 +1,17 @@
 #include "Sistem.h"
 
 void sistemStart()
-{
+{   char c;
     loading();
-    if(login())
-        optionMeni();
+    if(c=login())
+        optionMeni(c);
     else
         return;
 }
 
-bool login()
+char login()
 {
-    char c;
+    char c,r_mjesto;
     do
     {
     printf("Unesite username :");
@@ -19,8 +19,8 @@ bool login()
     scanf("%s",username);
     printf("\nUnesite sifru :");
     scanf("%s",sifra);
-    if(provjeriNalog(username,sifra))
-        return true;
+    if(r_mjesto=provjeriNalog(username,sifra))
+        return r_mjesto;
     else
         {
             printf("\nPogresan username ili sifra !!!");
@@ -29,11 +29,11 @@ bool login()
             scanf(" %c",&c);
         }
     }while(c);
-    return false;
+    return 0;
 }
 
 
-bool provjeriNalog(char* usrnm ,char* sfr)
+char provjeriNalog(char* usrnm ,char* sfr)
 {
     char ime[20],prezime[20],username[20],pin[5],radno_mjesto;
     double plata;
@@ -47,14 +47,14 @@ bool provjeriNalog(char* usrnm ,char* sfr)
             if((strcmp(username,usrnm)==0) && (strcmp(pin,sfr)==0))
             {
                 fclose(dat);
-                return true;
+                return radno_mjesto;// TEST izmjena- da se vrati radno mjesto kako bi se znalo koji opcioni meni da mu se prikaze
             }
             provjera=fscanf(dat,"%s %s %lf %s %s %c",ime,prezime,&plata,username,pin,&radno_mjesto);
 
         }
         fclose(dat);
     }
-    return false;
+    return 0;
 
 }
 
@@ -131,3 +131,48 @@ void azurirajNalog()
     }// NEDOVRSENO NASTAVLJAM SUTRA
 }//#ByIgorS
 
+void optionMeni(char c)
+{
+    if(c=='a')
+        adminMeni();
+    else
+        radnikMeni();
+}
+
+void adminMeni()
+{
+    char c;
+    do
+    {
+     adminMeniGrafika();
+        scanf("%c",&c);
+        switch(c)
+        {
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        }
+    }while(c)
+    izlazGrafika();
+}
+
+void radnikMeni()
+{
+    char c;
+    do
+    {
+     radnikMeniGrafika();
+        scanf("%c",&c);
+        switch(c)
+        {
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        }
+    }while(c)
+    izlazGrafika();
+}
