@@ -114,7 +114,7 @@ void sacuvajNalog(RADNIK *rad)
 void azurirajNalog()
 {
     FILE *dat;
-    int br_radnika,provjera,i=0;
+    int br_radnika,provjera,i=0,pom1=0;
     char pom[20],ime[20],prezime[20],username[20],pin[5],radno_mjesto;
     double plata;
     RADNIK *radnici;
@@ -141,6 +141,29 @@ void azurirajNalog()
         fclose(dat);
     }
 
+    for(i=0;i<br_radnika;i++)
+    {
+        if(strcmp(pom,radnici[i]->username)==0)
+        {
+            printf("Unesite ime:");scanf("%s",radnici[i]->osoba->ime);
+            printf("Unesite prezime:");scanf("%s",radnici[i]->osoba->prezime);
+            printf("Unesite platu:");scanf("%lf",&radnici[i]->osoba->plata);
+            printf("Unesite username:");scanf("%s",radnici[i]->username);
+            printf("Unesite pin:");scanf("%s",radnici[i]->pin);
+            printf("Unesite radno mjesto:")scanf("%c",&radnici[i]->radno_mjesto);
+            pom1++;
+        }
+    }
+    if(pom1)
+        printf("Nalog '%s' uspjesno azuriran!\n",pom);
+    else
+        printf("Greska pri azuriranju !Nalog '%s' nije azuriran!\n",pom);
+    if(dat=fopen("RADNICI.txt","w"))
+    {
+        for(i=0;i<br_radnika;i++)
+            fprintf(dat,"%s %s %lf %s %s %c\n",radnici[i]->osoba->ime,radnici[i]->osoba->prezime,radnici[i]->osoba->plata,radnici[i]->username,radnici[i]->pin,radnici[i]->radno_mjesto);
+        fclose(dat);
+    }
 }//#ByIgorS
 
 void optionMeni(char c)
