@@ -1,7 +1,8 @@
 #include "Sistem.h"
 
 void sistemStart()
-{   char c;
+{
+    char c;
     loading();
     if(c=login())
         optionMeni(c);
@@ -14,26 +15,51 @@ char login()
     char c,r_mjesto;
     do
     {
-    printf("Unesite username :");
-    char username[20],sifra[20];
-    scanf("%s",username);
-    printf("\nUnesite sifru :");
-    scanf("%s",sifra);
-    if(r_mjesto=provjeriNalog(username,sifra))
-        return r_mjesto;
-    else
+        printf("Unesite username :");
+        char username[20],sifra[20];
+        scanf("%s",username);
+        printf("\nUnesite sifru :");
+        scanf("%s",sifra);
+        if(r_mjesto=provjeriNalog(username,sifra))
+            return r_mjesto;
+        else
         {
             printf("\nPogresan username ili sifra !!!");
             printf("\nZa ponovo logovanje na sistem unesite 1.");
             printf("\nZa prekid prijavljivanja unesite 0.");
             scanf(" %c",&c);
         }
-    }while(c);
+    }
+    while(c);
     return 0;
 }
 
 
-char provjeriNalog(char* usrnm ,char* sfr)
+void pristupNalog()
+{
+    char c;
+    do
+    {
+        pristupNalogGrafika();
+        switch(c)
+        {
+        case '1':
+            dodajNalog();
+            break;
+        case '2':
+            azurirajNalog();
+            break;
+        case '3':
+            brisiNalog();
+            break;
+        case '0':
+            break;
+        }
+    }
+    while(c);
+}
+
+char provjeriNalog(char* usrnm,char* sfr)
 {
     char ime[20],prezime[20],username[20],pin[5],radno_mjesto;
     double plata;
@@ -124,46 +150,51 @@ void azurirajNalog()
     br_radnika=brojRadnika();
     radnici=(RADNIK*)calloc(br_radnika,sizeof(RADNIK));
     if(dat=fopen("RADNICI.txt","r")
-    {
-        for(i=0;i<br_radnika;i++)
+{
+    for(i=0; i<br_radnika; i++)
         {
             provjera=fscanf(dat,"%s %s %lf %s %s %c",ime,prezime,&plata,username,pin,&radno_mjesto);
             if(provjera==6)
-                {
-                    strcpy(radnici[i]->osoba->ime,ime);
-                    strcpy(radnici[i]->osoba->prezime,prezime);
-                    radnici[i]->osoba->plata=plata;
-                    strcpy(radnici[i]->username,username)
-                    strcpy(radnici[i]->pin,pin);
-                    radnici[i]->radno_mjesto=radno_mjesto;
-                }
+            {
+                strcpy(radnici[i]->osoba->ime,ime);
+                strcpy(radnici[i]->osoba->prezime,prezime);
+                radnici[i]->osoba->plata=plata;
+                strcpy(radnici[i]->username,username)
+                strcpy(radnici[i]->pin,pin);
+                radnici[i]->radno_mjesto=radno_mjesto;
+            }
         }
         fclose(dat);
     }
 
-    for(i=0;i<br_radnika;i++)
-    {
-        if(strcmp(pom,radnici[i]->username)==0)
+    for(i=0; i<br_radnika; i++)
+{
+    if(strcmp(pom,radnici[i]->username)==0)
         {
-            printf("Unesite ime:");scanf("%s",radnici[i]->osoba->ime);
-            printf("Unesite prezime:");scanf("%s",radnici[i]->osoba->prezime);
-            printf("Unesite platu:");scanf("%lf",&radnici[i]->osoba->plata);
-            printf("Unesite username:");scanf("%s",radnici[i]->username);
-            printf("Unesite pin:");scanf("%s",radnici[i]->pin);
+            printf("Unesite ime:");
+            scanf("%s",radnici[i]->osoba->ime);
+            printf("Unesite prezime:");
+            scanf("%s",radnici[i]->osoba->prezime);
+            printf("Unesite platu:");
+            scanf("%lf",&radnici[i]->osoba->plata);
+            printf("Unesite username:");
+            scanf("%s",radnici[i]->username);
+            printf("Unesite pin:");
+            scanf("%s",radnici[i]->pin);
             printf("Unesite radno mjesto:")scanf("%c",&radnici[i]->radno_mjesto);
             pom1++;
         }
     }
     if(pom1)
-        printf("Nalog '%s' uspjesno azuriran!\n",pom);
+    printf("Nalog '%s' uspjesno azuriran!\n",pom);
     else
         printf("Greska pri azuriranju !Nalog '%s' nije azuriran!\n",pom);
-    if(dat=fopen("RADNICI.txt","w"))
-    {
-        for(i=0;i<br_radnika;i++)
-            fprintf(dat,"%s %s %lf %s %s %c\n",radnici[i]->osoba->ime,radnici[i]->osoba->prezime,radnici[i]->osoba->plata,radnici[i]->username,radnici[i]->pin,radnici[i]->radno_mjesto);
-        fclose(dat);
-    }
+        if(dat=fopen("RADNICI.txt","w"))
+        {
+            for(i=0; i<br_radnika; i++)
+                    fprintf(dat,"%s %s %lf %s %s %c\n",radnici[i]->osoba->ime,radnici[i]->osoba->prezime,radnici[i]->osoba->plata,radnici[i]->username,radnici[i]->pin,radnici[i]->radno_mjesto);
+                fclose(dat);
+            }
 }//#ByIgorS
 
 void optionMeni(char c)
@@ -179,22 +210,40 @@ void adminMeni()
     char c;
     do
     {
-     adminMeniGrafika();
+        adminMeniGrafika();
         scanf("%c",&c);
         switch(c)
         {
-        case '1': pristupNalog();
-        case '2': evidencijaZaposlenih();
-        case '3': evidencijaRobe();
-        case '4': evidencijaRacuna();
-        case '5': prikazKursneListe();
-        case '6': pregledPodatakaKupca();
-        case '7': pregledProizvod();
-        case '8': pregledStanjaMjesec();
-        case '0': break;
+        case '1':
+            pristupNalog();
+            break;
+        case '2':
+            evidencijaZaposlenih();
+            break;
+        case '3':
+            evidencijaRobe();
+            break;
+        case '4':
+            evidencijaRacuna();
+            break;
+        case '5':
+            prikazKursneListe();
+            break;
+        case '6':
+            pregledPodatakaKupca();
+            break;
+        case '7':
+            pregledProizvod();
+            break;
+        case '8':
+            pregledStanjaMjesec();
+            break;
+        case '0':
+            break;
         }
-    }while(c)
-    izlazGrafika();
+    }
+    while(c);
+        izlazGrafika();
 }
 
 void radnikMeni() //Dane ZAVRSENO!!! TREBA PREGLEDATI
@@ -202,19 +251,31 @@ void radnikMeni() //Dane ZAVRSENO!!! TREBA PREGLEDATI
     char c;
     do
     {
-     radnikMeniGrafika();
+        radnikMeniGrafika();
         scanf("%c",&c);
         switch(c)
         {
-            case '1': evidencijaRobe();
-            case '2': pregledPodatakaKupca();
-            case '3': pregledProizvod();
-            case '4': citanjeRacuna()
-            case '5': pregledStanjaMjesec();
-            case '0': break;
+        case '1':
+            evidencijaRobe();
+            break;
+        case '2':
+            pregledPodatakaKupca();
+            break;
+        case '3':
+            pregledProizvod();
+            break;
+        case '4':
+            citanjeRacuna();
+            break;
+        case '5':
+            pregledStanjaMjesec();
+            break;
+        case '0':
+            break;
         }
-    }while(c)
-    izlazGrafika();
+    }
+    while(c);
+        izlazGrafika();
 }
 
 int brojRadnika()
@@ -267,4 +328,9 @@ void radnikMeniGrafika()
     printf("5.Mjesecni presjek");
     printf("------------------------------------------------\n");
     printf("IZLAZ('0')");
+}
+
+void pristupNalogGrafika()
+{
+    //PRIKA
 }

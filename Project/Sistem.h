@@ -38,8 +38,9 @@ void citanjeRacuna();
 
 ////GRAFICKI INTERFEJS
 void loading();
-void adminMeniGrafika(); //Dane ZAVRSENO!!! PREGLEDATI
-void radnikMeniGrafika(); //Dane ZAVRSENO!!! PREGLEDATI
+void adminMeniGrafika(); //Dane ZAVRSENO!!! PREGLEDATI - CHECKED
+void radnikMeniGrafika(); //Dane ZAVRSENO!!! PREGLEDATI - CHECKED
+void pristupNalogGrafika(); //Prika
 
             //zvjezdice pri unosu sifre
 
