@@ -197,7 +197,7 @@ void adminMeni()
     izlazGrafika();
 }
 
-void radnikMeni() //popuni ove ovde case-ove kao sto je adminMeni iznad,u sistem.h opcije radnika su gdje pise admin+radnik opcije
+void radnikMeni() //Dane ZAVRSENO!!! TREBA PREGLEDATI
 {
     char c;
     do
@@ -206,6 +206,12 @@ void radnikMeni() //popuni ove ovde case-ove kao sto je adminMeni iznad,u sistem
         scanf("%c",&c);
         switch(c)
         {
+            case '1': evidencijaRobe();
+            case '2': pregledPodatakaKupca();
+            case '3': pregledProizvod();
+            case '4': citanjeRacuna()
+            case '5': pregledStanjaMjesec();
+            case '0': break;
         }
     }while(c)
     izlazGrafika();
@@ -230,4 +236,35 @@ int brojRadnika()
         fclose(fp);
     }
     return br;
+}
+
+void adminMeniGrafika()
+{
+    printf(" Dobrodosli u administratorski meni\n");
+    printf("Molimo unesite broj opcije koju zelite:\n ");
+    printf("             MENI:             \n")
+    printf("1.Pristup korisnickim nalozima\n");
+    printf("2.Pristup evidenciji zaposlenih\n");
+    printf("3.Evidencija robe\n");
+    printf("4.Evidencija racuna\n");
+    printf("5.Prikaz kursne liste\n");
+    printf("6.Pregled podataka o kupcu\n");
+    printf("7.Pregled proizvoda\n");
+    printf("8.Mjesecni presjek\n");
+    printf("----------------------------------------\n");
+    printf("IZLAZ('0')\n");
+}
+
+void radnikMeniGrafika()
+{
+    printf("Dobrodosli u analiticki meni!\n");
+    printf("Molimo vas unesite broj opcije koju zelite: \n");
+    printf("         MENI:        \n")
+    printf("1.Evidencija robe\n");
+    printf("2.Pregled podataka o kupcu\n");
+    printf("3.Pregled proizvod\n");
+    printf("4.Citanje racuna\n");
+    printf("5.Mjesecni presjek");
+    printf("------------------------------------------------\n");
+    printf("IZLAZ('0')");
 }

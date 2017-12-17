@@ -38,9 +38,8 @@ void citanjeRacuna();
 
 ////GRAFICKI INTERFEJS
 void loading();
-void adminMeniGrafika(); //DANE ovo -treba da bude ispisano u konzoli opcije poredane po rednim brojevima kako su poredane i u definiciji u sistem.c
-void radnikMeniGrafika(); //DANE ovo -isto kao ovo iznad
-void izlazGrafika();
+void adminMeniGrafika(); //Dane ZAVRSENO!!! PREGLEDATI
+void radnikMeniGrafika(); //Dane ZAVRSENO!!! PREGLEDATI
 
             //zvjezdice pri unosu sifre
 
