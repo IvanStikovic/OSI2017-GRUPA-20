@@ -40,7 +40,7 @@ void citanjeRacuna();
 void loading();
 void adminMeniGrafika(); //Dane ZAVRSENO!!! PREGLEDATI - CHECKED
 void radnikMeniGrafika(); //Dane ZAVRSENO!!! PREGLEDATI - CHECKED
-void pristupNalogGrafika(); //Prika
+void pristupNalogGrafika(); //Prika ZAVRSIO - PREGLEDATI !
 
             //zvjezdice pri unosu sifre
 

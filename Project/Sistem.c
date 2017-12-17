@@ -330,7 +330,13 @@ void radnikMeniGrafika()
     printf("IZLAZ('0')");
 }
 
-void pristupNalogGrafika()
+void pristupNalogGrafika() // PRIKA ZAVRSIO - OBAVEZNO PREGLEDATI !
 {
-    //PRIKA
+    printf("Molimo vas unesite broj opcije za pristup nalogu:\n");
+    printf("      MENI\n");
+    printf("1. Dodaj nalog\n");
+    printf("2. Azuriraj nalog\n");
+    printf("3. Brisi nalog\n");
+    printf("------------------------\n");
+    printf("IZLAZ('0')\n");
 }
