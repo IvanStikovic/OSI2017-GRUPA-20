@@ -183,17 +183,21 @@ void adminMeni()
         scanf("%c",&c);
         switch(c)
         {
-        case '1':
-        case '2':
-        case '3':
-        case '4':
-        case '5':
+        case '1': pristupNalog();
+        case '2': evidencijaZaposlenih();
+        case '3': evidencijaRobe();
+        case '4': evidencijaRacuna();
+        case '5': prikazKursneListe();
+        case '6': pregledPodatakaKupca();
+        case '7': pregledProizvod();
+        case '8': pregledStanjaMjesec();
+        case '0': break;
         }
     }while(c)
     izlazGrafika();
 }
 
-void radnikMeni()
+void radnikMeni() //popuni ove ovde case-ove kao sto je adminMeni iznad,u sistem.h opcije radnika su gdje pise admin+radnik opcije
 {
     char c;
     do
@@ -202,11 +206,6 @@ void radnikMeni()
         scanf("%c",&c);
         switch(c)
         {
-        case '1':
-        case '2':
-        case '3':
-        case '4':
-        case '5':
         }
     }while(c)
     izlazGrafika();

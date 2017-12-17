@@ -23,12 +23,23 @@ void optionMeni(char);
 void adminMeni();
 void radnikMeni();
 
+    //admin opcije
+    // +pristupNalog();
+void evidencijaZaposlenih();
+void evidencijaRacuna();
+void prikazKursneListe();
 
+    //admin + radnik opcije
+void evidencijaRobe();
+void pregledPodatakaKupca(); //pregled podataka o kupcu
+void pregledProizvod(); //pregled podataka za odredjeni proizvod
+void pregledStanjaMjesec();
+void citanjeRacuna();
 
 ////GRAFICKI INTERFEJS
 void loading();
-void adminMeniGrafika();
-void radnikMeniGrafika();
+void adminMeniGrafika(); //DANE ovo -treba da bude ispisano u konzoli opcije poredane po rednim brojevima kako su poredane i u definiciji u sistem.c
+void radnikMeniGrafika(); //DANE ovo -isto kao ovo iznad
 void izlazGrafika();
 
             //zvjezdice pri unosu sifre
