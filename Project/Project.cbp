@@ -35,6 +35,20 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Osoba.h" />
+		<Unit filename="Proizvod.c">
+			<Option compilerVar="CC" />
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="Proizvod.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="Racun.c">
+			<Option compilerVar="CC" />
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="Racun.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="Radnik.c">
 			<Option compilerVar="CC" />
 		</Unit>
