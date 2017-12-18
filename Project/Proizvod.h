@@ -7,7 +7,7 @@ typedef struct proizvod
     double cijena;
 } PROIZVOD;
 
-PROIZVOD* kreirajProizvod(char*,double); //JORGINHO
+PROIZVOD* kreirajProizvod(char*,double); // JORGOS ZAVRSIO - PREGLEDATI OBAVEZNO !!!
 void obrisiProizvod(PROIZVOD*); //JORGINHO
 
 
