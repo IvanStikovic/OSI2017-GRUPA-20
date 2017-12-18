@@ -35,6 +35,24 @@ char login()
 }
 
 
+RADNIK* kopirajRadnika(char *ime, char *prezime, double plata, char *username, char *pin, char rmjesto)
+{
+	RADNIK *novi = (RADNIK*)malloc(sizeof(RADNIK));
+	novi->osoba = (OSOBA*)malloc(sizeof(OSOBA));
+	novi->osoba->ime = (char*)calloc(strlen(ime)+1,sizeof(char));
+	novi->osoba->prezime = (char*)calloc(strlen(prezime)+1, sizeof(char));
+	novi->username=(char*)calloc(strlen(username)+1, sizeof(char));
+	strcpy(novi->osoba->ime,ime);
+	strcpy(novi->osoba->prezime,prezime);
+	novi->osoba->plata = plata;
+	strcpy(novi->username,username);
+	novi->radno_mjesto = rmjesto;
+	strcpy(novi->pin,pin);
+	return novi;
+
+}
+
+
 void pristupNalog()
 {
     char c;
@@ -143,65 +161,61 @@ void azurirajNalog()
     int br_radnika,provjera,i=0,pom1=0;
     char pom[20],ime[20],prezime[20],username[20],pin[5],radno_mjesto;
     double plata;
-    RADNIK *radnici;
-
     printf("Unesite username naloga koji zelite da azurirate!\n");
     scanf("%s",pom);
     br_radnika=brojRadnika();
-    radnici=(RADNIK*)calloc(br_radnika,sizeof(RADNIK));
-    if(dat=fopen("RADNICI.txt","r")
-    {
+    RADNIK *radnici[br_radnika];
+    if(dat=fopen("RADNICI.txt","r"))
+{
     for(i=0; i<br_radnika; i++)
         {
             provjera=fscanf(dat,"%s %s %lf %s %s %c",ime,prezime,&plata,username,pin,&radno_mjesto);
             if(provjera==6)
-            {
-                strcpy(radnici[i].osoba->ime,ime);
-                strcpy(radnici[i].osoba->prezime,prezime);
-                radnici[i].osoba->plata=plata;
-                strcpy(radnici[i].username,username)
-                strcpy(radnici[i].pin,pin);
-                radnici[i].radno_mjesto=radno_mjesto;
-            }
+            	radnici[i] = kopirajRadnika(ime,prezime,plata,username,pin,radno_mjesto);
         }
         fclose(dat);
     }
-
-    for(i=0; i<br_radnika; i++)
-{
-    if(strcmp(pom,radnici[i].username)==0)
-        {
-            printf("Unesite ime:");
-            scanf("%s",radnici[i].osoba->ime);
-            printf("Unesite prezime:");
-            scanf("%s",radnici[i].osoba->prezime);
-            printf("Unesite platu:");
-            scanf("%lf",&radnici[i].osoba->plata);
-            printf("Unesite username:");
-            scanf("%s",radnici[i].username);
-            printf("Unesite pin:");
-            scanf("%s",radnici[i].pin);
-            printf("Unesite radno mjesto:");
-            scanf("%c",&radnici[i].radno_mjesto);
-            pom1++;
-        }
+	 for(i=0; i<br_radnika; i++)
+	{
+    	if(strcmp(pom,radnici[i]->username)==0)
+        	{
+            	printf("Unesite ime:");
+            	scanf("%s",ime);
+            	printf("Unesite prezime:");
+            	scanf("%s",prezime);
+            	printf("Unesite platu:");
+            	scanf("%lf",&plata);
+            	printf("Unesite username:");
+            	scanf("%s",username);
+            	printf("Unesite pin:");
+            	scanf("%s",pin);
+            	fflush(stdin);
+            	printf("Unesite radno mjesto:");
+            	scanf("%c",&radno_mjesto);
+            	pom1++;
+            	oslobodi(radnici[i]);
+            	radnici[i] = kopirajRadnika(ime,prezime,plata,username,pin,radno_mjesto);
+        	}
     }
     if(pom1)
+    {
+        if(dat=fopen("RADNICI.txt","w"))
         {
-            if(dat=fopen("RADNICI.txt","w"))
-            {
-                for(i=0; i<br_radnika; i++)
-                    fprintf(dat,"%s %s %lf %s %s %c\n",radnici[i].osoba->ime,radnici[i].osoba->prezime,radnici[i].osoba->plata,radnici[i].username,radnici[i].pin,radnici[i].radno_mjesto);
-                fclose(dat);
+            for(i=0; i<br_radnika; i++)
+                    {
+                    fflush(stdin);
+                    fprintf(dat,"%s %s %lf %s %s %c\n",radnici[i]->osoba->ime,radnici[i]->osoba->prezime,radnici[i]->osoba->plata,radnici[i]->username,radnici[i]->pin,radnici[i]->radno_mjesto);
+
+					}
+				fclose(dat);
             }
+         printf("Nalog '%s' uspjesno azuriran!\n",pom);
+    }
 
-
-            printf("Nalog '%s' uspjesno azuriran!\n",pom);
-        }
     else
-        printf("Greska pri azuriranju ! Nalog '%s' nije azuriran!\n",pom);
+        printf("Greska pri azuriranju !Nalog '%s' nije azuriran jer ne postoji u bazi podataka!\n",pom);
 
-}//#ByIgorS
+}//#ByIgorS&RH
 
 void optionMeni(char c)
 {
@@ -297,7 +311,7 @@ int brojRadnika()
             p=fscanf(fp,"%s %s %lf %s %s %c",ime,prezime,&plata,username,pin,&radno_mjesto);
             if(p==6)
                 br++;
-        }while(p==6)
+        }while(p==6);
         fclose(fp);
     }
     return br;
