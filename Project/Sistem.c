@@ -286,14 +286,12 @@ int brojRadnika()
     char pom[20],ime[20],prezime[20],username[20],pin[5],radno_mjesto;
     if(fp=fopen("RADNICI.txt","r"))
     {
-        p=fscanf(fp,"%s %s %lf %s %s %c",ime,prezime,&plata,username,pin,&radno_mjesto);
-        if(p==6)
-            br++;
-        while(p==6)
+        do
         {
             p=fscanf(fp,"%s %s %lf %s %s %c",ime,prezime,&plata,username,pin,&radno_mjesto);
-            br++;
-        }
+            if(p==6)
+                br++;
+        }while(p==6)
         fclose(fp);
     }
     return br;
