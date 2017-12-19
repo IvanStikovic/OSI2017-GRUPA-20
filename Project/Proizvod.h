@@ -7,8 +7,8 @@ typedef struct proizvod
     double cijena;
 } PROIZVOD;
 
-PROIZVOD* kreirajProizvod(char*,double); // JORGOS ZAVRSIO - PREGLEDATI OBAVEZNO !!!
-void obrisiProizvod(PROIZVOD*); //JORGINHO
+PROIZVOD* kreirajProizvod(char*,double); // URADJENO I PREGLEDANO !
+void obrisiProizvod(PROIZVOD*); // URADJENO I PREGLEDANO !
 
 
 #endif // PROIZVOD_H_INCLUDED

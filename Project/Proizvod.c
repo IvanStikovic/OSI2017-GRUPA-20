@@ -1,5 +1,5 @@
 #include "Proizvod.h"
-PROIZVOD* kreirajProizvod(char *naziv, double cijena)  // JORGOS ZAVRSIO - PREGLEDATI OBAVEZNO !!!
+PROIZVOD* kreirajProizvod(char *naziv, double cijena)  // JORGOS ZAVRSIO - PREGLEDANO !
 {
     PROIZVOD* proizvod;
     proizvod=(PROIZVOD*)malloc(sizeof(PROIZVOD));
@@ -7,4 +7,9 @@ PROIZVOD* kreirajProizvod(char *naziv, double cijena)  // JORGOS ZAVRSIO - PREGL
     strcpy(proizvod->naziv,naziv);
     proizvod->cijena=cijena;
     return proizvod;
+}
+void obrisiProizvod(PROIZVOD* p) // JORGOS ZAVRSIO - PREGLEDANO !
+{
+    free(p->naziv);
+    free(p);
 }
