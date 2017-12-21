@@ -1,40 +1,53 @@
 #include "Sistem.h"
 
-void sistemStart()
+void obrisiDatoteku()
 {
-    char c;
-    loading();
-    if(c=login())
-        optionMeni(c);
-    else
-        return;
+	FILE *dat;
+	if(dat = fopen("RADNICI.TXT","w"))
+		fclose(dat);
 }
 
-char login()
+void oslobodi(RADNIK *rad)
 {
-    char c,r_mjesto;
-    do
+
+    free(rad->osoba->ime);
+    free(rad->osoba->prezime);
+    free(rad->username);
+}
+
+int brojRadnika()
+{
+    FILE *fp;
+    int br=0,p;
+    double plata;
+    char pom[20],ime[20],prezime[20],username[20],pin[5],radno_mjesto;
+    if(fp=fopen("RADNICI.txt","r"))
     {
-        printf("Unesite username :");
-        char username[20],sifra[20];
-        scanf("%s",username);
-        printf("\nUnesite sifru :");
-        scanf("%s",sifra);
-        if(r_mjesto=provjeriNalog(username,sifra))
-            return r_mjesto;
-        else
+        do
         {
-            printf("\nPogresan username ili sifra !!!");
-            printf("\nZa ponovo logovanje na sistem unesite 1.");
-            printf("\nZa prekid prijavljivanja unesite 0.");
-            scanf(" %c",&c);
-        }
+            p=fscanf(fp,"%s %s %lf %s %s %c",ime,prezime,&plata,username,pin,&radno_mjesto);
+            if(p==6)
+                br++;
+        }while(p==6);
+        fclose(fp);
     }
-    while(c);
-    return 0;
+    return br;
 }
 
-
+void sacuvajNalog(RADNIK *rad)
+{
+    FILE *dat;
+    if(dat = fopen("RADNICI.TXT","a "))
+    {
+        fprintf(dat,"%s %s %lf %s %s %c\n",rad->osoba->ime, rad->osoba->prezime, rad->osoba->plata, rad->username, rad->pin, rad->radno_mjesto);
+        printf("Nalog je uspjesno kreiran i sacuvan!\n");
+        fclose(dat);
+        return;
+    }
+    else
+        printf("Nalog nije uspjesno kreiran i sacuvan, greska prilikom cuvanja naloga u bazi.\n");
+}
+//FUNKCIJA KOJA ALOCIRA  RADNIKA NA OSNOVU PARAMETARA
 RADNIK* kopirajRadnika(char *ime, char *prezime, double plata, char *username, char *pin, char rmjesto)
 {
 	RADNIK *novi = (RADNIK*)malloc(sizeof(RADNIK));
@@ -52,109 +65,58 @@ RADNIK* kopirajRadnika(char *ime, char *prezime, double plata, char *username, c
 
 }
 
-
-void pristupNalog()
+//FUNKCIJA KOJA UCITAVA RADNIKE IZ DATOTEKE U DINAMICKI NIZ
+RADNIK** ucitajRadnike()
 {
-    char c;
-    do
-    {
-        pristupNalogGrafika();
-        switch(c)
-        {
-        case '1':
-            dodajNalog();
-            break;
-        case '2':
-            azurirajNalog();
-            break;
-        case '3':
-            brisiNalog();
-            break;
-        case '0':
-            break;
-        }
-    }
-    while(c);
-}
-
-char provjeriNalog(char* usrnm,char* sfr)
-{
-    char ime[20],prezime[20],username[20],pin[5],radno_mjesto;
+	char ime[20],prezime[20],username[20],pin[5],radno_mjesto;
     double plata;
-    int provjera;
-    FILE *dat;
-    if(dat=fopen("RADNICI.txt","r"))
-    {
-        provjera=fscanf(dat,"%s %s %lf %s %s %c",ime,prezime,&plata,username,pin,&radno_mjesto);
-        while(provjera==6)
+	int provjera,br_radnika;
+	FILE *dat;
+	br_radnika = brojRadnika();
+	RADNIK **radnici = (RADNIK**)malloc((br_radnika) * sizeof(RADNIK*));
+	if(dat=fopen("RADNICI.txt","r"))
+	{
+		for(int i=0; i<br_radnika; i++)
         {
-            if((strcmp(username,usrnm)==0) && (strcmp(pin,sfr)==0))
-            {
-                fclose(dat);
-                return radno_mjesto;// TEST izmjena- da se vrati radno mjesto kako bi se znalo koji opcioni meni da mu se prikaze
-            }
             provjera=fscanf(dat,"%s %s %lf %s %s %c",ime,prezime,&plata,username,pin,&radno_mjesto);
-
+            if(provjera==6)
+            	radnici[i] = kopirajRadnika(ime,prezime,plata,username,pin,radno_mjesto);
         }
         fclose(dat);
-    }
-    return 0;
-
+	}
+	return radnici;
 }
 
-//FUNKCIJA ZA DODAVANJE NALOGA U DATOTEKU BY #RENE
+//FUNKCIJA ZA CUVANJE NALOGA U DATOTECI
 void dodajNalog()
 {
-    char ime[20], prezime[20],username[20];
-    OSOBA *nova = (OSOBA*)malloc(sizeof(OSOBA));
-    RADNIK *novi = (RADNIK*)malloc(sizeof(RADNIK));
-    printf("Unesite ime radnika:");
-    scanf("%s",ime);
-    printf("Unesite prezime radnika:");
-    scanf("%s",prezime);
-    printf("Unesite platu:");
-    scanf("%lf",&nova->plata);
-    nova->ime=(char*)calloc(sizeof(ime)+1, sizeof(char));
-    nova->prezime = (char*)calloc(sizeof(prezime)+1, sizeof(char));
-    strcpy(nova->ime,ime);
-    strcpy(nova->prezime,prezime);
-    printf("Unesite username za radnika:");
-    scanf("%s",username);
-    novi->username=(char*)calloc(sizeof(username)+1, sizeof(char));
-    strcpy(novi->username,username);
-    printf("Unesite PIN za radnika(4 CIFRE):");
-    scanf("%s",novi->pin);
-    getchar();
-    printf("Da li zaposleni ima privilegije administratora(a), ili analiticara(r):");
-    scanf("%c",&novi->radno_mjesto);
-    novi->osoba= nova;
+    RADNIK *novi = kreirajRadnika();
     sacuvajNalog(novi);  //FUNKCIJA KOJA DODAJE RADNIKA U DATOTEKU
     oslobodi(novi);    //FUNKCIJA KOJA DEALOCIRA SVE DIJELOVE RADNIKA
     return;
 }
 
-void oslobodi(RADNIK *rad)
+//FUNKCIJA BRISE NALOG IZ FAJLA
+void brisiNalog()
 {
-
-    free(rad->osoba->ime);
-    free(rad->osoba->prezime);
-    free(rad->username);
+	int i;
+	char username[20];
+	printf("Unesite username radnika ciji nalog zelite obrisati:");
+	scanf("%s",username);
+	RADNIK **radnici = ucitajRadnike();
+	int broj = brojRadnika();
+	obrisiDatoteku();
+	for(i=0 ; i<broj ; i++)
+		{
+			if(strcmp(radnici[i]->username, username))
+				sacuvajNalog(radnici[i]);
+			oslobodi(radnici[i]);
+		}
+	free(radnici);
+	return ;
 }
 
-void sacuvajNalog(RADNIK *rad)
-{
-    FILE *dat;
-    if(dat = fopen("RADNICI.TXT","r"))
-    {
-        fprintf(dat,"%s %s %lf %s %s %c\n",rad->osoba->ime, rad->osoba->prezime, rad->osoba->plata, rad->username, rad->pin, rad->radno_mjesto);
-        printf("Nalog je uspjesno kreiran i sacuvan!\n");
-        fclose(dat);
-        return;
-    }
-    else
-        printf("Nalog nije uspjesno kreiran i sacuvan, greska prilikom cuvanja naloga u bazi.\n");
-}
-
+//FUNKCIJA AZUIRRA ODREDJENI NALOG U FAJLU
 void azurirajNalog()
 {
     FILE *dat;
@@ -216,6 +178,92 @@ void azurirajNalog()
         printf("Greska pri azuriranju !Nalog '%s' nije azuriran jer ne postoji u bazi podataka!\n",pom);
 
 }//#ByIgorS&RH
+
+
+void sistemStart()
+{
+    char c;
+    loading();
+    if(c=login())
+        optionMeni(c);
+    else
+        return;
+}
+
+char login()
+{
+    char c,r_mjesto;
+    do
+    {
+        printf("Unesite username :");
+        char username[20],sifra[20];
+        scanf("%s",username);
+        printf("\nUnesite sifru :");
+        scanf("%s",sifra);
+        if(r_mjesto=provjeriNalog(username,sifra))
+            return r_mjesto;
+        else
+        {
+            printf("\nPogresan username ili sifra !!!");
+            printf("\nZa ponovo logovanje na sistem unesite 1.");
+            printf("\nZa prekid prijavljivanja unesite 0.");
+            scanf(" %c",&c);
+        }
+    }
+    while(c);
+    return 0;
+}
+
+
+void pristupNalog()
+{
+    char c;
+    do
+    {
+        pristupNalogGrafika();
+        switch(c)
+        {
+        case '1':
+            dodajNalog();
+            break;
+        case '2':
+            azurirajNalog();
+            break;
+        case '3':
+            brisiNalog();
+            break;
+        case '0':
+            break;
+        }
+    }
+    while(c);
+}
+
+char provjeriNalog(char* usrnm,char* sfr)
+{
+    char ime[20],prezime[20],username[20],pin[5],radno_mjesto;
+    double plata;
+    int provjera;
+    FILE *dat;
+    if(dat=fopen("RADNICI.txt","r"))
+    {
+        provjera=fscanf(dat,"%s %s %lf %s %s %c",ime,prezime,&plata,username,pin,&radno_mjesto);
+        while(provjera==6)
+        {
+            if((strcmp(username,usrnm)==0) && (strcmp(pin,sfr)==0))
+            {
+                fclose(dat);
+                return radno_mjesto;// TEST izmjena- da se vrati radno mjesto kako bi se znalo koji opcioni meni da mu se prikaze
+            }
+            provjera=fscanf(dat,"%s %s %lf %s %s %c",ime,prezime,&plata,username,pin,&radno_mjesto);
+
+        }
+        fclose(dat);
+    }
+    return 0;
+
+}
+
 
 void optionMeni(char c)
 {
@@ -296,25 +344,6 @@ void radnikMeni() //Dane ZAVRSENO!!! TREBA PREGLEDATI
     }
     while(c);
         izlazGrafika();
-}
-
-int brojRadnika()
-{
-    FILE *fp;
-    int br=0,p;
-    double plata;
-    char pom[20],ime[20],prezime[20],username[20],pin[5],radno_mjesto;
-    if(fp=fopen("RADNICI.txt","r"))
-    {
-        do
-        {
-            p=fscanf(fp,"%s %s %lf %s %s %c",ime,prezime,&plata,username,pin,&radno_mjesto);
-            if(p==6)
-                br++;
-        }while(p==6);
-        fclose(fp);
-    }
-    return br;
 }
 
 void adminMeniGrafika()

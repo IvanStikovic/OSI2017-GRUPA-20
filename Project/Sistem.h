@@ -17,6 +17,8 @@ void azurirajNalog();// 1
 void sacuvajNalog(RADNIK*);  //FUNKCIJA KOJA DODAJE RADNIKA U DATOTEKU    #RH
 void oslobodi(RADNIK*);  //FUNKCIJA KOJA DEALOCIRA SVE DIJELOVE RADNIKA   #RH
 int brojRadnika(); //Pomocna funkcija kod azuriranja i brisanja naloga #IgorS
+void obrisiDatoteku()
+RADNIK** ucitajRadnike()
 RADNIK* kopirajRadnika(char*, char*, double , char*, char*,char )
 
 //BIRANJE OPCIJA
