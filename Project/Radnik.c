@@ -33,9 +33,6 @@ RADNIK* kreirajRadnika()
 void ispisiRadnika(RADNIK *r)
 {
 
-    printf("%s\n",r->username);
-    printf("%s\n",r->pin);
-    printf("%c\n",r->radno_mjesto);
-    ispisiOsobu(r->osoba);
+    printf("%-10s %-15s %-15s %-4s %6.2lf %-15s ",r->osoba.ime,r->osoba.prezime,r->username,r->pin,r->osoba.plata,r->radno_mjesto);
 }
 

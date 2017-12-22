@@ -87,6 +87,28 @@ RADNIK** ucitajRadnike()
 	return radnici;
 }
 
+void pisiRadnike()
+{
+    RADNIK** r=ucitajRadnike();
+    int broj=brojRadnika();
+    int i;
+
+    printf("========== =============== =============== ==== ======== ===============\n");
+    printf("IME        PREZIME         USERNAME        PIN  PLATA    VRSTA KORISNIKA\n");
+    printf("========== =============== =============== ==== ======== ===============\n");
+    for(i=0;i<broj;i++)
+    {
+        printf("%-10s %-15s %-15s %-4s %8.2lf ",r[i]->osoba->ime,r[i]->osoba->prezime,r[i]->username,r[i]->pin,r[i]->osoba->plata);
+        if(r[i]->radno_mjesto=='a')
+            printf("Administrator\n");
+        else
+            printf("Analiticar\n");
+
+    }
+    printf("======================================================================\n");
+}
+
+
 //FUNKCIJA ZA CUVANJE NALOGA U DATOTECI
 void dodajNalog()
 {
