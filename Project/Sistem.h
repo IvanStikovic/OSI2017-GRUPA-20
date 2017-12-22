@@ -8,22 +8,22 @@
 
 void sistemStart(); //URADJENO DZ
 //PRIJAVA NA SISTEM
-bool login(); //URADJEDNO DZ
-char provjeriNalog(char*,char*); //to do -IGAC
-void pristupNalog(); // Ove tri ispod funkcije ce se moci samo pozvati iz ove (1)
-void dodajNalog();//  1
-void brisiNalog();//  1
-void azurirajNalog();// 1
-void sacuvajNalog(RADNIK*);  //FUNKCIJA KOJA DODAJE RADNIKA U DATOTEKU    #RH
-void oslobodi(RADNIK*);  //FUNKCIJA KOJA DEALOCIRA SVE DIJELOVE RADNIKA   #RH
-int brojRadnika(); //Pomocna funkcija kod azuriranja i brisanja naloga #IgorS
-void obrisiDatoteku()
-RADNIK** ucitajRadnike()
-RADNIK* kopirajRadnika(char*, char*, double , char*, char*,char )
+bool login(); //URADJEDNO
+char provjeriNalog(char*,char*); // URADJENO
+void pristupNalog(); // URADJENO
+void dodajNalog();//  URADJENO
+void brisiNalog();//  URADJENO
+void azurirajNalog();// URADJENO
+void sacuvajNalog(RADNIK*);  // URADJENO
+void oslobodi(RADNIK*);  // URADJENO
+int brojRadnika(); // URADJENO
+void obrisiDatoteku() // URADJENO
+RADNIK** ucitajRadnike() //URADJENO
+RADNIK* kopirajRadnika(char*, char*, double , char*, char*,char ) //URADJENO
 
 //BIRANJE OPCIJA
 void optionMeni(char);
-void adminMeni();
+void adminMeni();   //URADJENO
 void radnikMeni();
 
     //admin opcije
