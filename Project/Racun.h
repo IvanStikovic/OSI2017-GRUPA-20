@@ -20,6 +20,7 @@ int validanRacun(char*);
 void dodajProizvod(RACUN*,PROIZVOD*);
 void izmjeniRacun(RACUN*);
 void obrisiRacun(RACUN*);
+void pisiRacun(RACUN*); // JORGOS ZAVRSENO I PROVJERENO !!!
 
 //FORMATI RACUNA
 RACUN* format1(char*,char*);

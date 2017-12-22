@@ -33,6 +33,30 @@ void dodajProizvod(RACUN* racun,PROIZVOD* proizvod)
     strcpy(racun->proizvodi[racun->n].naziv,proizvod->naziv);
 }
 
+void pisiRacun(RACUN* racun) // JORGOS ZAVRSENO I PROVJERENO !!!
+{
+    int i;
+    racun->iznos=0.0;
+    printf("\n");
+    printf("------------------------------------------------------\n");
+    printf("Broj proizvoda na racunu: %d\n", racun->n);
+    printf("------------------------------------------------------\n");
+    printf("RB. NAZIV PROIZVODA           CIJENA   KOLICINA UKUPNO\n");
+    printf("--- ------------------------- ------ -------- ------\n");
+    for(i=0;i<(racun->n);i++)
+    {
+        printf("%2d. %-25s %6.2lf %8.2lf %6.2lf\n", i+1, racun->proizvodi[i].naziv, racun->proizvodi[i].cijena, racun->kolicina[i], (racun->proizvodi[i].cijena)*(racun->kolicina[i]));
+        (racun->iznos)+=((racun->proizvodi[i].cijena)*(racun->kolicina[i]));
+    }
+    printf("------------------------------------------------------\n");
+    printf("                                  ____________________ \n");
+    printf("\n");
+    printf("                                  UKUPAN IZNOS: %.2lf  \n", (racun->iznos));
+    printf("                                  ____________________\n");
+    printf("\n");
+    printf("------------------------------------------------------\n");
+}
+
 RACUN* format1(char* file,char* c)
 {
     FILE* dat;
