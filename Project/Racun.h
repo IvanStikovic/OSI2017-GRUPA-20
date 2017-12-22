@@ -22,7 +22,7 @@ void izmjeniRacun(RACUN*);
 void obrisiRacun(RACUN*);
 
 //FORMATI RACUNA
-RACUN* format1(char*,char*);
+RACUN* format1(char*,char*); // DZUNE RADIO TESTIRANO,MADA MOGLO BI SE JOS POSLIJE
 RACUN* format2(char*,char*);
 RACUN* format3(char*,char*);
 RACUN* format4(char*,char*);
