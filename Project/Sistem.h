@@ -8,8 +8,7 @@
 
 void sistemStart(); //URADJENO DZ
 //PRIJAVA NA SISTEM
-<<<<<<< HEAD
-bool login(); //URADJEDNO DZ
+char login(); //URADJEDNO DZ
 char provjeriNalog(char*,char*); //to do -IGAC
 void pristupNalog(); // Ove tri ispod funkcije ce se moci samo pozvati iz ove (1)
 void dodajNalog();//  1
@@ -21,21 +20,10 @@ int brojRadnika(); //Pomocna funkcija kod azuriranja i brisanja naloga #IgorS
 void obrisiDatoteku();
 RADNIK** ucitajRadnike();
 void pisiRadnike();
-RADNIK* kopirajRadnika(char*, char*, double , char*, char*,char )
-=======
-bool login(); //URADJEDNO
-char provjeriNalog(char*,char*); // URADJENO
-void pristupNalog(); // URADJENO
-void dodajNalog();//  URADJENO
-void brisiNalog();//  URADJENO
-void azurirajNalog();// URADJENO
-void sacuvajNalog(RADNIK*);  // URADJENO
-void oslobodi(RADNIK*);  // URADJENO
-int brojRadnika(); // URADJENO
-void obrisiDatoteku() // URADJENO
-RADNIK** ucitajRadnike() //URADJENO
-RADNIK* kopirajRadnika(char*, char*, double , char*, char*,char ) //URADJENO
->>>>>>> branch 'master' of https://github.com/IvanStikovic/OSI2017-GRUPA-20.git
+RADNIK* kopirajRadnika(char*, char*, double , char*, char*,char );
+
+
+
 
 //BIRANJE OPCIJA
 void optionMeni(char);

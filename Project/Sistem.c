@@ -40,7 +40,7 @@ void sacuvajNalog(RADNIK *rad)
     if(dat = fopen("RADNICI.TXT","a "))
     {
         fprintf(dat,"%s %s %lf %s %s %c\n",rad->osoba->ime, rad->osoba->prezime, rad->osoba->plata, rad->username, rad->pin, rad->radno_mjesto);
-        printf("Nalog je uspjesno kreiran i sacuvan!\n");
+        //printf("Nalog je uspjesno kreiran i sacuvan!\n");
         fclose(dat);
         return;
     }
@@ -76,7 +76,8 @@ RADNIK** ucitajRadnike()
 	RADNIK **radnici = (RADNIK**)malloc((br_radnika) * sizeof(RADNIK*));
 	if(dat=fopen("RADNICI.txt","r"))
 	{
-		for(int i=0; i<br_radnika; i++)
+	    int i;
+		for( i=0; i<br_radnika; i++)
         {
             provjera=fscanf(dat,"%s %s %lf %s %s %c",ime,prezime,&plata,username,pin,&radno_mjesto);
             if(provjera==6)
@@ -127,7 +128,8 @@ void brisiNalog()
 	scanf("%s",username);
 	RADNIK **radnici = ucitajRadnike();
 	int broj = brojRadnika();
-	obrisiDatoteku();
+	//obrisiDatoteku();
+	remove("RADNICI.txt");
 	for(i=0 ; i<broj ; i++)
 		{
 			if(strcmp(radnici[i]->username, username))
@@ -205,7 +207,7 @@ void azurirajNalog()
 void sistemStart()
 {
     char c;
-    loading();
+    //loading(); treba napraviti
     if(c=login())
         optionMeni(c);
     else
@@ -229,10 +231,12 @@ char login()
             printf("\nPogresan username ili sifra !!!");
             printf("\nZa ponovo logovanje na sistem unesite 1.");
             printf("\nZa prekid prijavljivanja unesite 0.");
+            printf("\nVas odabir : \n");
+            fflush(stdin);
             scanf(" %c",&c);
         }
     }
-    while(c);
+    while(c!='0');
     return 0;
 }
 
@@ -243,6 +247,8 @@ void pristupNalog()
     do
     {
         pristupNalogGrafika();
+        fflush(stdin);
+        scanf("%c",&c);
         switch(c)
         {
         case '1':
@@ -258,7 +264,7 @@ void pristupNalog()
             break;
         }
     }
-    while(c);
+    while(c!='0');
 }
 
 char provjeriNalog(char* usrnm,char* sfr)
@@ -301,6 +307,7 @@ void adminMeni()
     do
     {
         adminMeniGrafika();
+        fflush(stdin);
         scanf("%c",&c);
         switch(c)
         {
@@ -308,32 +315,32 @@ void adminMeni()
             pristupNalog();
             break;
         case '2':
-            evidencijaZaposlenih();
+             pisiRadnike();
             break;
         case '3':
-            evidencijaRobe();
+            //evidencijaRobe();
             break;
         case '4':
-            evidencijaRacuna();
+            //evidencijaRacuna(); treba napraviti
             break;
         case '5':
-            prikazKursneListe();
+           // prikazKursneListe(); treba napraviti
             break;
         case '6':
-            pregledPodatakaKupca();
+            //pregledPodatakaKupca(); treba napraviti
             break;
         case '7':
-            pregledProizvod();
+           // pregledProizvod(); treba napraviti
             break;
         case '8':
-            pregledStanjaMjesec();
+           // pregledStanjaMjesec(); treba napraviti
             break;
         case '0':
             break;
         }
     }
-    while(c);
-        izlazGrafika();
+    while(c!='0');
+       // izlazGrafika(); treba napraviti
 }
 
 void radnikMeni() //Dane ZAVRSENO!!! TREBA PREGLEDATI
@@ -342,37 +349,38 @@ void radnikMeni() //Dane ZAVRSENO!!! TREBA PREGLEDATI
     do
     {
         radnikMeniGrafika();
+        fflush(stdin);
         scanf("%c",&c);
         switch(c)
         {
         case '1':
-            evidencijaRobe();
+            //evidencijaRobe(); treba napraviti
             break;
         case '2':
-            pregledPodatakaKupca();
+            //pregledPodatakaKupca(); treba napraviti
             break;
         case '3':
-            pregledProizvod();
+            //pregledProizvod(); treba napraviti
             break;
         case '4':
-            citanjeRacuna();
+            //citanjeRacuna(); treba napraviti
             break;
         case '5':
-            pregledStanjaMjesec();
+            //pregledStanjaMjesec(); treba napraviti
             break;
         case '0':
             break;
         }
     }
-    while(c);
-        izlazGrafika();
+    while(c!='0');
+       // izlazGrafika(); treba napraviti
 }
 
 void adminMeniGrafika()
 {
     printf(" Dobrodosli u administratorski meni\n");
     printf("Molimo unesite broj opcije koju zelite:\n ");
-    printf("             MENI:             \n")
+    printf("             MENI:             \n");
     printf("1.Pristup korisnickim nalozima\n");
     printf("2.Pristup evidenciji zaposlenih\n");
     printf("3.Evidencija robe\n");
@@ -389,7 +397,7 @@ void radnikMeniGrafika()
 {
     printf("Dobrodosli u analiticki meni!\n");
     printf("Molimo vas unesite broj opcije koju zelite: \n");
-    printf("         MENI:        \n")
+    printf("         MENI:        \n");
     printf("1.Evidencija robe\n");
     printf("2.Pregled podataka o kupcu\n");
     printf("3.Pregled proizvod\n");

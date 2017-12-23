@@ -1,6 +1,6 @@
 #include "Racun.h"
 
-void uveziRacune()
+/*void uveziRacune()
 {
     int i;
     char *c;
@@ -16,7 +16,7 @@ void uveziRacune()
             else (pom=format4(argv[i],c))
                 sacuvajRacun(pom,c);
 }
-
+*/
 RACUN* kreirajRacun()
 {
     RACUN* racun=(RACUN*)calloc(1,sizeof(RACUN));
@@ -89,7 +89,7 @@ RACUN* format1(char* file,char* c)
             if(ukupno==sum)
                 return pomRacun;
             else
-            {   obrisiRacun(pomRacun);
+            {   //obrisiRacun(pomRacun); TREBA NAPRAVITI
                 return 0;
             }
         }

@@ -5,6 +5,7 @@
 #include "Sistem.h"
 
 int main()
-{
+{   //dodajNalog();
+    sistemStart();
     return 0;
 }
