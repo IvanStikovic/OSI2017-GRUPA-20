@@ -94,4 +94,45 @@ RACUN* format1(char* file,char* c)
             }
         }
         else return 0;
-    }
+}
+
+RACUN* format4(char* file,char* c)
+{
+    FILE* dat;
+    int i;
+    if(dat=fopen(file,"r"))
+    {
+        RACUN* pomRacun=(RACUN*)calloc(1,sizeof(RACUN));
+        pomRacun->n=1;
+        char pomString[150],naziv[30],sifra[30];
+        int br=0;
+        double kolicina,cijena,ukupno;
+        pomRacun->proizvodi=(PROIZVOD*)calloc(pomRacun->n,sizeof(PROIZVOD));
+        pomRacun->kolicina=(double*)calloc(pomRacun->n,sizeof(double));
+        for(i=0; i<7; i++)
+            fgets(pomString,150,dat);
+            int sum=0;
+        while(fscanf(dat,"%s %s - %lf - %lf - %lf",sifra,naziv,&kolicina,&cijena,&ukupno)==5)
+        {
+            if(br==(pomRacun->n-1))
+            {
+                pomRacun->proizvodi=realloc(pomRacun->proizvodi,(pomRacun->n+1)*sizeof(PROIZVOD*));
+                pomRacun->kolicina=realloc(pomRacun->kolicina,(pomRacun->n+1)*sizeof(double));
+                pomRacun->n+=1;
+            }
+            pomRacun->proizvodi[br].cijena=cijena;
+            strcpy(pomRacun->proizvodi[br].naziv,sifra);
+            pomRacun->kolicina[br]=kolicina;
+            sum+=ukupno;
+            br++;
+        }
+            fscanf(dat,"%lf",&ukupno);
+            if(ukupno==sum)
+                return pomRacun;
+            else
+            {   //obrisiRacun(pomRacun);
+                return 0;
+            }
+        }
+        else return 0;
+}
