@@ -1,12 +1,5 @@
 #include "Sistem.h"
 
-void obrisiDatoteku()
-{
-	FILE *dat;
-	if(dat = fopen("RADNICI.TXT","w"))
-		fclose(dat);
-}
-
 void oslobodi(RADNIK *rad)
 {
 
@@ -128,7 +121,6 @@ void brisiNalog()
 	scanf("%s",username);
 	RADNIK **radnici = ucitajRadnike();
 	int broj = brojRadnika();
-	//obrisiDatoteku();
 	remove("RADNICI.txt");
 	for(i=0 ; i<broj ; i++)
 		{
@@ -245,10 +237,11 @@ void pristupNalog()
 {
     char c;
     do
-    {
+    {   system("cls");
         pristupNalogGrafika();
         fflush(stdin);
         scanf("%c",&c);
+        system("cls");
         switch(c)
         {
         case '1':
@@ -265,6 +258,7 @@ void pristupNalog()
         }
     }
     while(c!='0');
+    system("cls");
 }
 
 char provjeriNalog(char* usrnm,char* sfr)
@@ -309,6 +303,7 @@ void adminMeni()
         adminMeniGrafika();
         fflush(stdin);
         scanf("%c",&c);
+        system("cls");
         switch(c)
         {
         case '1':
@@ -316,6 +311,7 @@ void adminMeni()
             break;
         case '2':
              pisiRadnike();
+             printf("\n\n\n");
             break;
         case '3':
             //evidencijaRobe();
@@ -348,6 +344,7 @@ void radnikMeni() //Dane ZAVRSENO!!! TREBA PREGLEDATI
     char c;
     do
     {
+        system("cls");
         radnikMeniGrafika();
         fflush(stdin);
         scanf("%c",&c);
