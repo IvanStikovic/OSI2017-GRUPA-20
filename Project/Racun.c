@@ -95,3 +95,42 @@ RACUN* format1(char* file,char* c)
         }
         else return 0;
     }
+
+RACUN* format3(char* file,char* c)
+{
+	char naziv[20],sifra[20],pomstring[100];
+	int sum=0,br=0,i;
+	double cijena,ukupno,kolicina;
+	FILE *dat;
+	if(dat = fopen(file,"r"))
+	{
+		RACUN *pomRacun = kreirajRacun();
+		pomRacun->n = 1;
+		pomRacun->proizvodi = (PROIZVOD*)malloc(pom->n * sizeof(PROIZVOD));
+		pomRacun->kolicina = (double*)malloc(pom->n * sizeof(double));
+		for(i=0 ; i<9 ; i++)
+			fgets(pomstring,100,dat);
+		while(fscanf("%s %s ====== %lf ====== %lf ====== %lf ====== %lf",naziv,sifra,&kolicina,&cijena,&ukupno)==5)
+		{
+			if(br==(pomRacun->n-1))
+            {
+                pomRacun->proizvodi=realloc(pomRacun->proizvodi,(pomRacun->n+1)*sizeof(PROIZVOD));
+                pomRacun->kolicina=realloc(pomRacun->kolicina,(pomRacun->n+1)*sizeof(double));
+                pomRacun->n+=1;
+            }
+            pomRacun->proizvodi[br].cijena=cijena;
+            strcpy(pomRacun->proizvodi[br].naziv,naziv);
+            pomRacun->kolicina[br]=kolicina;
+            sum+=ukupno;
+            br++;
+		}
+		fscanf(dat,"%lf",&ukupno);
+		if(sum == ukupno)
+			return pomRacun;
+		else
+			//obrisiRacun(pomRacun), return 0;
+	}
+	else
+		return 0;
+}
+
