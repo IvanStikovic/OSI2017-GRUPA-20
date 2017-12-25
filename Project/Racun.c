@@ -125,6 +125,11 @@ RACUN* format1(char* file)
     else return 0;
 }
 
+RACUN* format2(char* file)
+{
+    //NAPRAVITI
+}
+
 RACUN* format3(char* file)
 {
     char naziv[20],sifra[20],pomstring[100];
@@ -209,3 +214,7 @@ RACUN* format4(char* file)
     else return 0;
 }
 
+void sacuvajRacun(RACUN* racun)
+{
+
+}

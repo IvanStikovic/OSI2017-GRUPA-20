@@ -31,6 +31,9 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Linker>
+			<Add option="-Wl,--allow-multiple-definition" />
+		</Linker>
 		<Unit filename="Osoba.c">
 			<Option compilerVar="CC" />
 		</Unit>
