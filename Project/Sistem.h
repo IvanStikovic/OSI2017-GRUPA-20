@@ -7,6 +7,7 @@
 
 
 void sistemStart(); //URADJENO DZ
+
 //PRIJAVA NA SISTEM
 char login(); //URADJEDNO DZ
 char provjeriNalog(char*,char*); //to do -IGAC

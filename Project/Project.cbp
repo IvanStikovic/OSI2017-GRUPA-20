@@ -37,32 +37,33 @@
 		<Unit filename="Osoba.h" />
 		<Unit filename="Proizvod.c">
 			<Option compilerVar="CC" />
-			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="Proizvod.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="Proizvod.h" />
+		<Unit filename="Project.depend" />
+		<Unit filename="Project.layout" />
+		<Unit filename="RADNICI.TXT" />
 		<Unit filename="Racun.c">
 			<Option compilerVar="CC" />
-			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="Racun.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="Racun.h" />
 		<Unit filename="Radnik.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Radnik.h" />
 		<Unit filename="Sistem.c">
 			<Option compilerVar="CC" />
-			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="Sistem.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="Sistem.h" />
+		<Unit filename="bin/Debug/Project.exe" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="obj/Debug/Osoba.o" />
+		<Unit filename="obj/Debug/Proizvod.o" />
+		<Unit filename="obj/Debug/Racun.o" />
+		<Unit filename="obj/Debug/Radnik.o" />
+		<Unit filename="obj/Debug/Sistem.o" />
+		<Unit filename="obj/Debug/main.o" />
 		<Extensions>
 			<code_completion />
 			<envvars />
