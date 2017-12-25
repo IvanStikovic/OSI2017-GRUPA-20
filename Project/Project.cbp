@@ -11,6 +11,7 @@
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option parameters="C:\Users\Dajana\git\OSI2017-GRUPA-20\Project\RACUNI" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>

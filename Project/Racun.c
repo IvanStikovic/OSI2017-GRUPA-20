@@ -30,17 +30,18 @@ void uveziRacune(int argc,char* argv[])
 
     while ((file=readdir(directory)) != NULL)
     {
+        char c;
         printf("%s\n", file->d_name);
         int i;
         RACUN* pom;
-        if(pom=format1(file->d_name))
-            sacuvajRacun(pom);
-        else if(pom=format2(file->d_name))
-            sacuvajRacun(pom);
-        else if(pom=format3(file->d_name))
-            sacuvajRacun(pom);
-        else if(pom=format4(file->d_name))
-            sacuvajRacun(pom);
+        if(pom=format1(file->d_name,&c))
+            sacuvajRacun(pom,c);
+        else if(pom=format2(file->d_name,&c))
+            sacuvajRacun(pom,c);
+        else if(pom=format3(file->d_name,&c))
+            sacuvajRacun(pom,c);
+        else if(pom=format4(file->d_name,&c))
+            sacuvajRacun(pom,c);
     }
     closedir(directory);
 }
@@ -83,11 +84,11 @@ void pisiRacun(RACUN* racun) // JORGOS ZAVRSENO I PROVJERENO !!!
     printf("------------------------------------------------------\n");
 }
 
-RACUN* format1(char* file)
+RACUN* format1(char* file,char* c)
 {
     FILE* dat;
     int i;
-    if((dat=fopen(file,"r")))
+    if(dat=fopen(file,"r"))
     {
         RACUN* pomRacun=kreirajRacun();
         pomRacun->n=1;
@@ -125,12 +126,12 @@ RACUN* format1(char* file)
     else return 0;
 }
 
-RACUN* format2(char* file)
+RACUN* format2(char* file,char* c)
 {
     //NAPRAVITI
 }
 
-RACUN* format3(char* file)
+RACUN* format3(char* file,char* c)
 {
     char naziv[20],sifra[20],pomstring[100];
     int sum=0,br=0,i;
@@ -172,7 +173,7 @@ RACUN* format3(char* file)
         return 0;
 }
 
-RACUN* format4(char* file)
+RACUN* format4(char* file,char* c)
 {
     FILE* dat;
     int i;
@@ -214,7 +215,13 @@ RACUN* format4(char* file)
     else return 0;
 }
 
-void sacuvajRacun(RACUN* racun)
+void sacuvajRacun(RACUN* racun,char* c)
 {
+    FILE *dat;
+    if(dat=fopen("STORAGE.txt","w"))
+    {
 
+        fprintf(dat,"IZNOS : %lf BROJ : %d ",racun->iznos,racun->n);
+    }
+    fclose(dat);
 }
