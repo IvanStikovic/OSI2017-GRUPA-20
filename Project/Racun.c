@@ -19,7 +19,7 @@ void uveziRacune(int argc,char* argv[])
         exit(1);
     }
 
-    directory = opendir(argv[1]);
+    directory = opendir("./RACUNI");
     if (directory == NULL)
     {
         printf("Error\n");
@@ -87,29 +87,34 @@ void pisiRacun(RACUN* racun) // JORGOS ZAVRSENO I PROVJERENO !!!
 RACUN* format1(char* file,char* c)
 {
     FILE* dat;
+    char filepath[100]={0};
+    strcpy(filepath,"./RACUNI/");
+    strcat(filepath,file);
+    printf("%s",filepath);
     int i;
-    if(dat=fopen(file,"r"))
+    if(dat=fopen(filepath,"r"))
     {
         RACUN* pomRacun=kreirajRacun();
-        pomRacun->n=1;
+        pomRacun->n=0;
         char pomString[150],naziv[30],sifra[30];
         int br=0;
         double kolicina,cijena,ukupno;
-        pomRacun->proizvodi=(PROIZVOD*)calloc(pomRacun->n,sizeof(PROIZVOD));
-        pomRacun->kolicina=(double*)calloc(pomRacun->n,sizeof(double));
+        //pomRacun->proizvodi=(PROIZVOD*)calloc(pomRacun->n,sizeof(PROIZVOD));
+        //pomRacun->kolicina=(double*)calloc(pomRacun->n,sizeof(double));
         for(i=0; i<6; i++)
             fgets(pomString,150,dat);
         int sum=0;
         while(fscanf(dat,"%s %s - %lf - %lf - %lf",sifra,naziv,&kolicina,&cijena,&ukupno)==5)
         {
-            if(br==(pomRacun->n-1))
+            if(br==pomRacun->n)
             {
-                pomRacun->proizvodi=realloc(pomRacun->proizvodi,(pomRacun->n+1)*sizeof(PROIZVOD*));
-                pomRacun->kolicina=realloc(pomRacun->kolicina,(pomRacun->n+1)*sizeof(double));
+                pomRacun->proizvodi=(PROIZVOD*)realloc(pomRacun->proizvodi,(pomRacun->n+1)*sizeof(PROIZVOD));
+                pomRacun->kolicina=(double*)realloc(pomRacun->kolicina,(pomRacun->n+1)*sizeof(double));
                 pomRacun->n+=1;
             }
             pomRacun->proizvodi[br].cijena=cijena;
-            //strcpy(pomRacun->proizvodi[br].naziv,sifra); NE RADI,treba alocirati prvo
+            pomRacun->proizvodi[br].naziv=(char*)calloc(strlen(sifra)+1,1);
+            strcpy(pomRacun->proizvodi[br].naziv,sifra);
             pomRacun->kolicina[br]=kolicina;
             sum+=ukupno;
             br++;
