@@ -90,7 +90,7 @@ RACUN* format1(char* file,char* c)
     char filepath[100]={0};
     strcpy(filepath,"./RACUNI/");
     strcat(filepath,file);
-    printf("%s",filepath);
+    //printf("%s",filepath);
     int i;
     if(dat=fopen(filepath,"r"))
     {
@@ -99,8 +99,6 @@ RACUN* format1(char* file,char* c)
         char pomString[150],naziv[30],sifra[30];
         int br=0;
         double kolicina,cijena,ukupno;
-        //pomRacun->proizvodi=(PROIZVOD*)calloc(pomRacun->n,sizeof(PROIZVOD));
-        //pomRacun->kolicina=(double*)calloc(pomRacun->n,sizeof(double));
         for(i=0; i<6; i++)
             fgets(pomString,150,dat);
         int sum=0;
@@ -133,26 +131,29 @@ RACUN* format1(char* file,char* c)
 
 RACUN* format2(char* file,char* c)
 {
-    //NAPRAVITI
+    return 0;
 }
 
 RACUN* format3(char* file,char* c)
 {
-    char naziv[20],sifra[20],pomstring[100];
+    char filepath[100]={0};
+    strcpy(filepath,"./RACUNI/");
+    strcat(filepath,file);
+    char naziv[30]={0},sifra[30]={0},pomstring[100];
     int sum=0,br=0,i;
     double cijena,ukupno,kolicina;
     FILE *dat;
-    if((dat = fopen(file,"r")))
+    if((dat = fopen(filepath,"r")))
     {
         RACUN *pomRacun = kreirajRacun();
-        pomRacun->n = 1;
-        pomRacun->proizvodi = (PROIZVOD*)malloc(pomRacun->n * sizeof(PROIZVOD));
-        pomRacun->kolicina = (double*)malloc(pomRacun->n * sizeof(double));
+        pomRacun->n = 0;
+        //pomRacun->proizvodi = (PROIZVOD*)malloc(pomRacun->n * sizeof(PROIZVOD));
+        //pomRacun->kolicina = (double*)malloc(pomRacun->n * sizeof(double));
         for(i=0 ; i<9 ; i++)
             fgets(pomstring,100,dat);
-        while(fscanf(dat,"%s %s ====== %lf ====== %lf ====== %lf",naziv,sifra,&kolicina,&cijena,&ukupno)==5)
+        while(fscanf(dat,"%s %s - %lf======%lf======%lf",naziv,sifra,&kolicina,&cijena,&ukupno)==5)
         {
-            if(br==(pomRacun->n-1))
+            if(br==(pomRacun->n))
             {
                 pomRacun->proizvodi=realloc(pomRacun->proizvodi,(pomRacun->n+1)*sizeof(PROIZVOD));
                 pomRacun->kolicina=realloc(pomRacun->kolicina,(pomRacun->n+1)*sizeof(double));
