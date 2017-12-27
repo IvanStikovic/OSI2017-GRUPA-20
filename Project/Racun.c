@@ -131,6 +131,7 @@ RACUN* format1(char* file,char* c)
 
 RACUN* format2(char* file,char* c)
 {
+<<<<<<< HEAD
     return 0;
 }
 
@@ -140,8 +141,11 @@ RACUN* format3(char* file,char* c)
     strcpy(filepath,"./RACUNI/");
     strcat(filepath,file);
     char naziv[30]={0},sifra[30]={0},pomstring[100];
+=======
+    /char naziv[20],pomString[100];
+>>>>>>> refs/remotes/origin/master
     int sum=0,br=0,i;
-    double cijena,ukupno,kolicina;
+    double cijena,ukupno,kolicina,sifra;
     FILE *dat;
     if((dat = fopen(filepath,"r")))
     {
@@ -150,13 +154,18 @@ RACUN* format3(char* file,char* c)
         //pomRacun->proizvodi = (PROIZVOD*)malloc(pomRacun->n * sizeof(PROIZVOD));
         //pomRacun->kolicina = (double*)malloc(pomRacun->n * sizeof(double));
         for(i=0 ; i<9 ; i++)
+<<<<<<< HEAD
             fgets(pomstring,100,dat);
         while(fscanf(dat,"%s %s - %lf======%lf======%lf",naziv,sifra,&kolicina,&cijena,&ukupno)==5)
+=======
+            fgets(pomString,100,dat);
+        while(fscanf(dat,"%s %lf - %lf - %lf - %lf",naziv,&sifra,&kolicina,&cijena,&ukupno)==5)
+>>>>>>> refs/remotes/origin/master
         {
             if(br==(pomRacun->n))
             {
-                pomRacun->proizvodi=realloc(pomRacun->proizvodi,(pomRacun->n+1)*sizeof(PROIZVOD));
-                pomRacun->kolicina=realloc(pomRacun->kolicina,(pomRacun->n+1)*sizeof(double));
+                pomRacun->proizvodi=(PROIZVOD*)realloc(pomRacun->proizvodi,(pomRacun->n+1) * sizeof(PROIZVOD));
+                pomRacun->kolicina=(double*)realloc(pomRacun->kolicina,(pomRacun->n+1)*sizeof(double));
                 pomRacun->n+=1;
             }
             pomRacun->proizvodi[br].cijena=cijena;
@@ -165,8 +174,7 @@ RACUN* format3(char* file,char* c)
             sum+=ukupno;
             br++;
         }
-        fgets(pomstring,100,dat);
-        fscanf(dat,"%lf",&ukupno);
+        fscanf(dat,"%s %lf",pomString, &ukupno);
         if(sum == ukupno)
             return pomRacun;
         else
@@ -176,12 +184,54 @@ RACUN* format3(char* file,char* c)
         }
     }
 
-        return 0;
+    else return 0;
 }
+
+RACUN* format3(char* file,char* c)
+{
+    char naziv[20],pomString[100];
+    int sum=0,br=0,i;
+    double cijena,ukupno,kolicina,sifra;
+    FILE *dat;
+    if((dat = fopen(file,"r")))
+    {
+        RACUN *pomRacun = kreirajRacun();
+        pomRacun->n = 1;
+        pomRacun->proizvodi = (PROIZVOD*)malloc(pomRacun->n * sizeof(PROIZVOD));
+        pomRacun->kolicina = (double*)malloc(pomRacun->n * sizeof(double));
+        for(i=0 ; i<9 ; i++)
+            fgets(pomString,100,dat);
+        while(fscanf(dat,"%s %lf ====== %lf ====== %lf ====== %lf",naziv,&sifra,&kolicina,&cijena,&ukupno)==5)
+        {
+            if(br==(pomRacun->n-1))
+            {
+                pomRacun->proizvodi=(PROIZVOD*)realloc(pomRacun->proizvodi,(pomRacun->n+1) * sizeof(PROIZVOD));
+                pomRacun->kolicina=(double*)realloc(pomRacun->kolicina,(pomRacun->n+1)*sizeof(double));
+                pomRacun->n+=1;
+            }
+            pomRacun->proizvodi[br].cijena=cijena;
+           // strcpy(pomRacun->proizvodi[br].naziv,naziv); Ne radi,treba alocirati prvo
+            pomRacun->kolicina[br]=kolicina;
+            sum+=ukupno;
+            br++;
+        }
+        fscanf(dat,"%s %lf",pomString, &ukupno);
+        if(sum == ukupno)
+            return pomRacun;
+        else
+        {
+            //obrisiRacun(pomRacun);
+            return 0;
+        }
+    }
+
+    else return 0;
+}
+
 
 RACUN* format4(char* file,char* c)
 {
-    FILE* dat;
+   FILE* dat;
     int i;
     if((dat=fopen(file,"r")))
     {
@@ -199,8 +249,8 @@ RACUN* format4(char* file,char* c)
         {
             if(br==(pomRacun->n-1))
             {
-                pomRacun->proizvodi=realloc(pomRacun->proizvodi,(pomRacun->n+1)*sizeof(PROIZVOD*));
-                pomRacun->kolicina=realloc(pomRacun->kolicina,(pomRacun->n+1)*sizeof(double));
+                pomRacun->proizvodi=(PROIZVOD*)realloc(pomRacun->proizvodi,(pomRacun->n+1)*sizeof(PROIZVOD));
+                pomRacun->kolicina=(double*)realloc(pomRacun->kolicina,(pomRacun->n+1)*sizeof(double));
                 pomRacun->n+=1;
             }
             pomRacun->proizvodi[br].cijena=cijena;
