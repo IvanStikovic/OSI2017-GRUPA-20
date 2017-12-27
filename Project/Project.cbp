@@ -35,6 +35,9 @@
 		<Linker>
 			<Add option="-Wl,--allow-multiple-definition" />
 		</Linker>
+		<Unit filename="Datum.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="Osoba.c">
 			<Option compilerVar="CC" />
 		</Unit>

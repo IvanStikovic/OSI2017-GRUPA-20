@@ -5,6 +5,7 @@ typedef struct proizvod
 {
     char *naziv;
     double cijena;
+    double sifra;
 } PROIZVOD;
 
 PROIZVOD* kreirajProizvod(char*,double); // URADJENO I PREGLEDANO !

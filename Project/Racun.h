@@ -5,18 +5,21 @@
 #include <dirent.h>
 #include "Proizvod.h"
 #include <string.h>
+#include "Datum.h"
+
 typedef struct racun
 {
+    DATUM datum;
+    char* kupac;
     PROIZVOD* proizvodi;
     double* kolicina;
     double iznos;
     int n;//BROJ PROIZVODA
 } RACUN;
 
-void uveziRacune(int argc,char *argv[]); //UCITAVA RACUNE I RASPOREDJUJE IH U ODNOSU NA TO DA LI SU ULAZNI ILI IZLAZNI
-void parse_cmdline(int argc,char* argv[]);
-void sacuvajRacun(RACUN*,char*); // SNIMA RACUN U DATOTEKU
-RACUN* ucitajRacune(char); // VRACA DINAMICKI ALOCIRAN NIZ RACUNA
+void uveziRacune(); //UCITAVA RACUNE I RASPOREDJUJE IH U ODNOSU NA TO DA LI SU ULAZNI ILI IZLAZNI
+void sacuvajRacun(RACUN*,char); // SNIMA RACUN U DATOTEKU
+RACUN* ucitajRacune(int*); //
 RACUN* kreirajRacun();
 int validanRacun(char*);
 void dodajProizvod(RACUN*,PROIZVOD*);

@@ -1,9 +1,16 @@
 #ifndef SISTEM_H_INCLUDED
 #define SISTEM_H_INCLUDED
 #include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
 #include <stdbool.h>
-#include"Radnik.h"
+#include <windows.h>
+#include "Radnik.h"
+#include "Racun.h"
 
+#define ENTER 13
+#define SPACE 32
+#define BACKSPACE 8
 
 
 void sistemStart(); //URADJENO DZ

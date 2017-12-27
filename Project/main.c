@@ -6,8 +6,10 @@
 #include "Racun.h"
 
 int main(int argc, char *argv[])
-{   //dodajNalog();
-    parse_cmdline(argc, argv);
+{
+    //parse_cmdline(argc, argv);
+    //remove("SKLADISTE.txt");
+    remove("SKLADISTE.txt");
     sistemStart();
     return 0;
 }
