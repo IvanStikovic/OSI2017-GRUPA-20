@@ -720,8 +720,48 @@ void loadingGrafika()
 
 }
 
+void ispisLogo()
+{
+    printf("\n\n\n\n\n\n\n\n");
+    printf("                                          * *    * *   * * *  \n");
+    printf("                                         *   *  *   *    *    \n");
+    printf("                                         *   *  * * *    *    \n");
+    printf("                                          *     *   *    *    \n");
+    printf("                                            *   *   *    *    \n");
+    printf("                                         *   *                \n");
+    printf("                                         *   * ");
+    printf("S ");
+    printf("0 ");
+    printf("F ");
+    printf("T ");
+    printf("V ");
+    printf("E ");
+    printf("R  \n");
+    printf("                                          * *  ");
+}
+
+
 void izlazGrafika()
 {
+    char pom[11]="DOVIDJENJA";
+    int i;
+    Sleep(500);
+    for(i=0;i<3;i++)
+    {
+        printf("Sistem se gasi");ispisLogo();Sleep(500);system("cls");
+        printf("Sistem se gasi .");ispisLogo();Sleep(500);system("cls");
+        printf("Sistem se gasi . .");ispisLogo();Sleep(500);system("cls");
+        printf("Sistem se gasi . . .");ispisLogo();Sleep(500);system("cls");
+    }
+    Sleep(200);
+    printf("\n\n\n\n\n\n\n\n\n\n\n\n                                         ");
+    for(i=0;i<10;i++)
+    {
+        printf("%c ",pom[i]);
+        Sleep(100);
+    }
+    printf("!");
+
 
     //IGAC OVDE UBACI
 }
