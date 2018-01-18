@@ -15,16 +15,19 @@ void uveziRacune()
     while ((file=readdir(directory)) != NULL)
     {
         char c='0';
-        int i;
         RACUN* pom;
-        if(pom=format1(file->d_name,&c))
+        if((pom=format1(file->d_name,&c)))
             sacuvajRacun(pom,c);
-        else if(pom=format2(file->d_name,&c))
+        else if((pom=format2(file->d_name,&c)))
             sacuvajRacun(pom,c);
-        else if(pom=format3(file->d_name,&c))
+        else if((pom=format3(file->d_name,&c)))
             sacuvajRacun(pom,c);
-        else if(pom=format4(file->d_name,&c))
+        else if((pom=format4(file->d_name,&c)))
             sacuvajRacun(pom,c);
+    //  else if((pom=format5(file->d_name,&c)))
+    //      sacuvajRacun(pom,c);
+        else if((pom && c=='0'))
+            obrisiRacun(&pom);
     }
     closedir(directory);
 }
@@ -50,7 +53,7 @@ void pisiRacun(RACUN* racun) // JORGOS ZAVRSENO I PROVJERENO !!!
     racun->iznos=0.0;
     printf("||||||||||||||||||||||||||||||||||||||||||||||||||||||||\n\n");
     printf("Kupac: %s\n", racun->kupac);
-      printf("------------------------------------------------------\n");
+    printf("------------------------------------------------------\n");
     printf("Datum: %d/%d/%d\n", racun->datum.dan,racun->datum.mjesec,racun->datum.godina);
     printf("------------------------------------------------------\n");
     printf("Broj proizvoda na racunu: %d\n", racun->n);
@@ -59,14 +62,14 @@ void pisiRacun(RACUN* racun) // JORGOS ZAVRSENO I PROVJERENO !!!
     printf("--- ------------------------- ------ -------- ------\n");
     for(i=0; i<(racun->n); i++)
     {
-        printf("%2d. %-25s %6.2lf %8.2lf %6.2lf\n", i+1, racun->proizvodi[i].naziv, racun->proizvodi[i].cijena, racun->kolicina[i], (racun->proizvodi[i].cijena)*(racun->kolicina[i]));
+        printf("%2d. %-25s %6.2lf %8.2lf %6.2lf\n", i+1, racun->proizvodi[i].naziv, racun->proizvodi[i].cijena*valuta.kurs, racun->kolicina[i], (racun->proizvodi[i].cijena)*(racun->kolicina[i])*valuta.kurs);
         (racun->iznos)+=((racun->proizvodi[i].cijena)*(racun->kolicina[i]));
     }
     printf("------------------------------------------------------\n");
     printf("                                  ____________________ \n");
     printf("\n");
-    printf("                                  UKUPAN IZNOS: %.2lf  \n", (racun->iznos));
-    printf("                                  ____________________\n");
+    printf("      HVALA NA POVJERENJU         UKUPAN IZNOS: %.2lf  \n", (racun->iznos)*valuta.kurs);
+    printf(" SVE CIJENE SU IZRAZENE U : %s    ____________________\n",valuta.oznaka);
     printf("\n");
     printf("------------------------------------------------------\n\n\n");
 }
@@ -78,12 +81,11 @@ RACUN* format1(char* file,char* c)
     strcpy(filepath,"./RACUNI/");
     strcat(filepath,file);
     int i;
-    if(dat=fopen(filepath,"r"))
+    if((dat=fopen(filepath,"r")))
     {
         RACUN* pomRacun=kreirajRacun();
         pomRacun->n=0;
         char pomString[150],naziv[30],kupac[30];
-        DATUM datum;
         int br=0;
         double sifra,kolicina,cijena,ukupno;
         fscanf(dat,"%s %s\n",pomString,kupac);
@@ -119,11 +121,12 @@ RACUN* format1(char* file,char* c)
         else
         {
             fclose(dat);
-            //obrisiRacun(pomRacun); TREBA NAPRAVITI
+            //obrisiRacun(&pomRacun); PODESITI
             return 0;
         }
     }
-    else return 0;
+    else
+        return 0;
 }
 
 RACUN* format2(char* file,char* c)
@@ -177,7 +180,6 @@ RACUN* format2(char* file,char* c)
         else
         {
             fclose(dat);
-            //obrisiRacun(pomRacun);
             return 0;
         }
     }
@@ -232,7 +234,6 @@ RACUN* format3(char* file,char* c)
         else
         {
             fclose(dat);
-            //obrisiRacun(pomRacun);
             return 0;
         }
     }
@@ -288,11 +289,29 @@ RACUN* format4(char* file,char* c)
         else
         {
             fclose(dat);
-            //obrisiRacun(pomRacun);
             return 0;
         }
     }
-    else return 0;
+    else
+        return 0;
+}
+
+RACUN* format5(char* file,char* c)
+{
+    // UBACI RENCI OVDE
+}
+
+void getSifra(FILE *f,char *pom)
+{
+	char c;
+	int i=0;
+	do
+	{
+		c = getc(f);
+		if(c == -1)
+			return;
+		pom[i++] = c;
+	}while(c != ',');
 }
 
 void sacuvajRacun(RACUN* racun,char c)
@@ -300,7 +319,7 @@ void sacuvajRacun(RACUN* racun,char c)
     FILE *dat;
     if(c=='s')
     {
-        if(dat=fopen("SKLADISTE.txt","a"))
+        if((dat=fopen("SKLADISTE.txt","a")))
         {
             int i;
             fprintf(dat,"-------------------------------------------------------------------------\n");
@@ -311,7 +330,7 @@ void sacuvajRacun(RACUN* racun,char c)
             for(i=0; i<racun->n; i++)
                 fprintf(dat,"%s %3.0lf %4.2lf %4.2lf\n",racun->proizvodi[i].naziv,racun->proizvodi[i].sifra,racun->kolicina[i],racun->proizvodi[i].cijena);
             fprintf(dat,"-------------------------------------------------------------------------\n");
-
+            obrisiRacun(&racun);
         }
         fclose(dat);
     }
@@ -320,7 +339,7 @@ void sacuvajRacun(RACUN* racun,char c)
 RACUN* ucitajRacune(int* broj)
 {
     FILE *dat;
-    if(dat=fopen("SKLADISTE.txt","r"))
+    if((dat=fopen("SKLADISTE.txt","r")))
     {
         RACUN *racuni;
         char pomString[100],kupac[20];
@@ -340,6 +359,7 @@ RACUN* ucitajRacune(int* broj)
                 fscanf(dat,"%s %d",pomString,&racuni[br].n);
                 racuni[br].proizvodi=(PROIZVOD*)calloc(racuni[br].n,sizeof(PROIZVOD));
                 racuni[br].kolicina=(double*)calloc(racuni[br].n,sizeof(double));
+                racuni[br].iznos=0;
                 int j;
                 for(j=0; j<racuni[br].n; j++)
                 {
@@ -347,12 +367,37 @@ RACUN* ucitajRacune(int* broj)
                     fscanf(dat,"%s %lf %lf %lf",naziv,&racuni[br].proizvodi[j].sifra,&racuni[br].kolicina[j],&racuni[br].proizvodi[j].cijena);
                     racuni[br].proizvodi[j].naziv=(char*)calloc(strlen(naziv)+1,sizeof(char));
                     strcpy(racuni[br].proizvodi[j].naziv,naziv);
+                    racuni[br].iznos+=racuni[br].kolicina[j]*racuni[br].proizvodi[j].cijena;
                 }
                 br++;
-
             }
         }
         *broj=br;
         return racuni;
     }
+    else
+        return NULL;
+}
+
+void obrisiRacune(RACUN *racuni,int broj_racuna)
+{
+    int i,j;
+    for(i=0; i<broj_racuna; i++)
+    {
+        for(j=0; j<racuni[i].n; j++)
+            free(racuni[i].proizvodi[j].naziv);
+        free(racuni[i].proizvodi);
+        free(racuni[i].kolicina);
+        free(racuni[i].kupac);
+    }
+    free(racuni);
+}
+void obrisiRacun(RACUN **racun)
+{
+    int i;
+    free((*racun)->kolicina);
+    for(i=0; i<(*racun)->n; i++)
+        free((*racun)->proizvodi[i].naziv);
+    free((*racun)->proizvodi);
+    free(*racun);
 }

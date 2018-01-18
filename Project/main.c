@@ -5,11 +5,8 @@
 #include "Sistem.h"
 #include "Racun.h"
 
-int main(int argc, char *argv[])
+int main()
 {
-    //parse_cmdline(argc, argv);
-    //remove("SKLADISTE.txt");
-    remove("SKLADISTE.txt");
     sistemStart();
     return 0;
 }

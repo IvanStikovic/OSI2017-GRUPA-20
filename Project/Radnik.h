@@ -10,9 +10,8 @@ typedef struct radnik
     OSOBA* osoba;
 } RADNIK;
 
-RADNIK* kreirajRadnika();
-void ucitajRadnika(RADNIK*);
-void ispisiRadnika(RADNIK*);
-void obrisiRadnika(RADNIK*);
+RADNIK* kreirajRadnika(); // KREIRA DINAMICKI ALOCIRANU PROMJENLJIVU TIPA RADNIK
+void ucitajRadnika(RADNIK*); // UCITAVA RADNIKA SA PODACIMA KOJI SE UNOSE SA STANDARDNOG ULAZA
+void obrisiRadnika(RADNIK*);  // OSLOBADJA MEMORIJSKI PROSTOR ALOCIRANE PROMJENLJIVE TIPA RADNIK
 
 #endif // RADNIK_H_INCLUDED

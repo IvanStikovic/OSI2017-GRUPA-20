@@ -11,10 +11,10 @@ typedef struct osoba
     double plata;
 } OSOBA;
 
-OSOBA* kreirajOsobu();// TREBA PROVJERITI!!!!
-void ucitajOsobu(OSOBA*);
-void ispisiOsobu(OSOBA*);
-void obrisiOsobu(OSOBA*);//PRIKA
+OSOBA* kreirajOsobu(); // KREIRA DINAMICKI ALOCIRANU PROMJENLJIVU TIPA OSOBA
+void ucitajOsobu(OSOBA*);   // UCITAVA OSOBU SA PODACIMA KOJI SE UNOSE SA STANDARDNOG ULAZA
+void ispisiOsobu(OSOBA*);   //ISPISUJE PROMJENLJIVU TIPA OSOBA
+void obrisiOsobu(OSOBA*); // OSLOBADJA MEMORIJSKI PROSTOR ALOCIRANE PROMJENLJIVE TIPA OSOBA
 
 
 #endif // OSOBA_H_INCLUDED

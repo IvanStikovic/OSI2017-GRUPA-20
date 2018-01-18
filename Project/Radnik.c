@@ -1,6 +1,6 @@
 #include "Radnik.h"
 
-void obrisiRadnika(RADNIK*r)
+void obrisiRadnika(RADNIK* r)
 {
 
     free(r->username);
@@ -30,9 +30,4 @@ RADNIK* kreirajRadnika()
     return pom;
 }
 
-void ispisiRadnika(RADNIK *r)
-{
-
-    printf("%-10s %-15s %-15s %-4s %6.2lf %-15s ",r->osoba->ime,r->osoba->prezime,r->username,r->pin,r->osoba->plata,r->radno_mjesto);
-}
 

@@ -35,9 +35,7 @@
 		<Linker>
 			<Add option="-Wl,--allow-multiple-definition" />
 		</Linker>
-		<Unit filename="Datum.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="Datum.h" />
 		<Unit filename="Osoba.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -61,6 +59,13 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Sistem.h" />
+		<Unit filename="Valuta.c">
+			<Option compilerVar="CC" />
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="Valuta.h">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="bin/Debug/Project.exe" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
