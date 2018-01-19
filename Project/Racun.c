@@ -24,8 +24,8 @@ void uveziRacune()
             sacuvajRacun(pom,c);
         else if((pom=format4(file->d_name,&c)))
             sacuvajRacun(pom,c);
-    //  else if((pom=format5(file->d_name,&c)))
-    //      sacuvajRacun(pom,c);
+        //  else if((pom=format5(file->d_name,&c)))
+        //      sacuvajRacun(pom,c);
         else if((pom && c=='0'))
             obrisiRacun(&pom);
     }
@@ -121,7 +121,6 @@ RACUN* format1(char* file,char* c)
         else
         {
             fclose(dat);
-            //obrisiRacun(&pomRacun); PODESITI
             return 0;
         }
     }
@@ -303,37 +302,43 @@ RACUN* format5(char* file,char* c)
 
 void getSifra(FILE *f,char *pom)
 {
-	char c;
-	int i=0;
-	do
-	{
-		c = getc(f);
-		if(c == -1)
-			return;
-		pom[i++] = c;
-	}while(c != ',');
+    char c;
+    int i=0;
+    do
+    {
+        c = getc(f);
+        if(c == -1)
+            return;
+        pom[i++] = c;
+    }
+    while(c != ',');
 }
 
 void sacuvajRacun(RACUN* racun,char c)
 {
     FILE *dat;
+    char validni[100]= {"SKLADISTE.txt"};
+    char nevalidni[100]= {"ERROR.txt"};
+    char pom[100]= {0};
     if(c=='s')
+        strcpy(pom,validni);
+    else if(c=='e')
+        strcpy(pom,nevalidni);
+    if((dat=fopen(pom,"a")))
     {
-        if((dat=fopen("SKLADISTE.txt","a")))
-        {
-            int i;
-            fprintf(dat,"-------------------------------------------------------------------------\n");
-            fprintf(dat,"%s\n","RACUN");
-            fprintf(dat,"%s %s\n","KUPAC:",racun->kupac);
-            fprintf(dat,"%s %d/%d/%d\n","DATUM:",racun->datum.dan,racun->datum.mjesec,racun->datum.godina);
-            fprintf(dat,"%s %d\n","BROJ:",racun->n);
-            for(i=0; i<racun->n; i++)
-                fprintf(dat,"%s %3.0lf %4.2lf %4.2lf\n",racun->proizvodi[i].naziv,racun->proizvodi[i].sifra,racun->kolicina[i],racun->proizvodi[i].cijena);
-            fprintf(dat,"-------------------------------------------------------------------------\n");
-            obrisiRacun(&racun);
-        }
+        int i;
+        fprintf(dat,"-------------------------------------------------------------------------\n");
+        fprintf(dat,"%s\n","RACUN");
+        fprintf(dat,"%s %s\n","KUPAC:",racun->kupac);
+        fprintf(dat,"%s %d/%d/%d\n","DATUM:",racun->datum.dan,racun->datum.mjesec,racun->datum.godina);
+        fprintf(dat,"%s %d\n","BROJ:",racun->n);
+        for(i=0; i<racun->n; i++)
+            fprintf(dat,"%s %3.0lf %4.2lf %4.2lf\n",racun->proizvodi[i].naziv,racun->proizvodi[i].sifra,racun->kolicina[i],racun->proizvodi[i].cijena);
+        fprintf(dat,"-------------------------------------------------------------------------\n");
+        obrisiRacun(&racun);
         fclose(dat);
     }
+
 }
 
 RACUN* ucitajRacune(int* broj)

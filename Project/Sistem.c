@@ -5,6 +5,7 @@ VALUTA valuta= {"KM",1}; // PODRAZUMIJEVANA VALUTA
 void sistemStart()
 {
     char c;
+    remove("ERROR.txt");
     remove("SKLADISTE.txt");
     uveziRacune();
     //loadingGrafika();
@@ -231,7 +232,7 @@ void evidencijaRobe(char c)
         for(k=0; k<racuni[j].n; k++)
         {
             int provjera=0;
-            for(p=0; p<=br; p++)
+            for(p=0; p<br; p++)
                 if(racuni[j].proizvodi[k].sifra==proizvodi[p].sifra && br!=0)
                 {
                     kolicina[p]+=racuni[j].kolicina[k];
@@ -239,7 +240,7 @@ void evidencijaRobe(char c)
                 }
             if(provjera!=1)
             {
-                if(br==0)
+                /*if(br==0)
                 {
                     proizvodi=(PROIZVOD*)calloc(br+1,sizeof(PROIZVOD));
                     kolicina=(double*)calloc(br+1,sizeof(double));
@@ -248,6 +249,11 @@ void evidencijaRobe(char c)
                 {
                     proizvodi=(PROIZVOD*)realloc(proizvodi,br*sizeof(PROIZVOD));
                     kolicina=(double*)realloc(kolicina,br*sizeof(double));
+                }*/
+                if(br>0)
+                {
+                    proizvodi=(PROIZVOD*)realloc(proizvodi,(br+1)*sizeof(PROIZVOD));
+                    kolicina=(double*)realloc(kolicina,(br+1)*sizeof(double));
                 }
                 proizvodi[br].naziv=(char*)calloc(strlen(racuni[j].proizvodi[k].naziv)+1,1);
                 strcpy(proizvodi[br].naziv,racuni[j].proizvodi[k].naziv);
@@ -321,13 +327,20 @@ void evidencijaRobe(char c)
             printf("\n%2d. %-25s %6.2lf %s %11.2lf %9.2lf %3s\n",i+1,proizvodi[i].naziv,proizvodi[i].cijena*valuta.kurs,valuta.oznaka,kolicina[i],proizvodi[i].cijena*kolicina[i]*valuta.kurs,valuta.oznaka);
         printf("==================================================================\n");
     }
-    obrisiRacune(racuni,broj_racuna);
-    for(i=0;i<br;i++)
-        free(proizvodi[i].naziv);
-    free(proizvodi);
-    free(kolicina);
 
+    obrisiProizvode(proizvodi,br,kolicina);
+    obrisiRacune(racuni,broj_racuna);
 }
+
+void obrisiProizvode(PROIZVOD* proizvodi,int broj_proizvoda,double* kolicina)
+{
+    int i;
+    for(i=0; i<broj_proizvoda; i++)
+        free(proizvodi[i].naziv);
+    free(proizvodi); // DEALOKACIJA
+    free(kolicina);
+}
+
 void evidencijaRacuna()
 {
     int broj_racuna,j;
@@ -746,16 +759,28 @@ void izlazGrafika()
     char pom[11]="DOVIDJENJA";
     int i;
     Sleep(500);
-    for(i=0;i<3;i++)
+    for(i=0; i<3; i++)
     {
-        printf("Sistem se gasi");ispisLogo();Sleep(500);system("cls");
-        printf("Sistem se gasi .");ispisLogo();Sleep(500);system("cls");
-        printf("Sistem se gasi . .");ispisLogo();Sleep(500);system("cls");
-        printf("Sistem se gasi . . .");ispisLogo();Sleep(500);system("cls");
+        printf("Sistem se gasi");
+        ispisLogo();
+        Sleep(500);
+        system("cls");
+        printf("Sistem se gasi .");
+        ispisLogo();
+        Sleep(500);
+        system("cls");
+        printf("Sistem se gasi . .");
+        ispisLogo();
+        Sleep(500);
+        system("cls");
+        printf("Sistem se gasi . . .");
+        ispisLogo();
+        Sleep(500);
+        system("cls");
     }
     Sleep(200);
     printf("\n\n\n\n\n\n\n\n\n\n\n\n                                         ");
-    for(i=0;i<10;i++)
+    for(i=0; i<10; i++)
     {
         printf("%c ",pom[i]);
         Sleep(100);

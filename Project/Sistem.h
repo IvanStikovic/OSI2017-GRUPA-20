@@ -30,6 +30,8 @@ void pisiRadnike(); // ISPISUJE RADNIKE
 RADNIK* kopirajRadnika(char*, char*, double , char*, char*,char ); // KOPIRA RADNIKA
 
 
+void obrisiProizvode(PROIZVOD* proizvodi,int broj_proizvoda,double* kolicina);
+
 
 
 //BIRANJE OPCIJA
