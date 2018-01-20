@@ -297,7 +297,52 @@ RACUN* format4(char* file,char* c)
 
 RACUN* format5(char* file,char* c)
 {
-    // UBACI RENCI OVDE
+    	char provjera[5];
+	int i=0;
+	int len = strlen(file);
+	for(i=0 ; i<3 ; i++)
+		provjera[i] = file[len-3+i];
+	if(!strcmp(provjera,"csv"))
+	{
+    	FILE* dat;
+    	char filepath[100]= {0};
+    	strcpy(filepath,"./RACUNI/");
+    	strcat(filepath,file);
+    	if((dat=fopen(filepath,"r")))
+    	{
+        	RACUN* pomRacun=kreirajRacun();
+        	pomRacun->n=0;
+        	char pomString[150],kupac[30] = "Nepoznat";
+        	int br=0;
+        	double sifra,kolicina,cijena,ukupno;
+        	pomRacun->kupac=(char*)calloc(strlen(kupac)+1,sizeof(char));
+        	strcpy(pomRacun->kupac,kupac);
+        	fgets(pomString,150,dat);
+        	while(fscanf(dat,"%lf, %lf, %lf, %lf\n",&sifra,&kolicina,&cijena,&ukupno)==4)
+        	{
+        		char naziv[20] = "Nepoznat";
+            	if(br==pomRacun->n)
+            	{
+                	pomRacun->proizvodi=(PROIZVOD*)realloc(pomRacun->proizvodi,(pomRacun->n+1)*sizeof(PROIZVOD));
+                	pomRacun->kolicina=(double*)realloc(pomRacun->kolicina,(pomRacun->n+1)*sizeof(double));
+                	pomRacun->n+=1;
+            	}
+            	pomRacun->proizvodi[br].cijena=cijena;
+            	pomRacun->proizvodi[br].sifra=sifra;
+            	pomRacun->proizvodi[br].naziv=(char*)calloc(strlen(naziv)+1,1);
+            	strcpy(pomRacun->proizvodi[br].naziv,naziv);
+            	pomRacun->kolicina[br]=kolicina;
+            	br++;
+        	}
+        	*c = 's';
+        	fclose(dat);
+        	return pomRacun;
+    	}
+    	else
+    		return 0;
+    }
+    else
+    return 0;
 }
 
 void getSifra(FILE *f,char *pom)

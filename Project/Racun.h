@@ -37,7 +37,6 @@ RACUN* format2(char*,char*);
 RACUN* format3(char*,char*);
 RACUN* format4(char*,char*);
 RACUN* format5(char*,char*);
-void getSifra(FILE *f,char *pom); // POMOCNA FUNKCIJA ZA FORMAT5
 
 
 #endif // RACUN_H_INCLUDED
