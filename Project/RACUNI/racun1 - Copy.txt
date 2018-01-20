@@ -4,9 +4,9 @@ Datum: 24/10/2017
 	       Racun
 
 Proizvod - kolicina - cijena - ukupno
-jabuka 123  -    40    -    5   -   200
-banana 456  -    20    -   10   -   200
+jabuka 123  -    10    -    5   -   50
+orange 222  -    20    -   10   -   200
 ---------------------------------------
-Ukupno: 400
+Ukupno: 240
 PDV: 42.5
 Ukupno za placanje: 292.5 

@@ -28,9 +28,7 @@ int brojRadnika(); //VRACA BROJ RADNIKA
 RADNIK** ucitajRadnike(); //UCITAVA RADNIKE I VRACA DINAMICKI ALOCIRAN NIZ POKAZIVACA NA RADNIK
 void pisiRadnike(); // ISPISUJE RADNIKE
 RADNIK* kopirajRadnika(char*, char*, double , char*, char*,char ); // KOPIRA RADNIKA
-
-
-void obrisiProizvode(PROIZVOD* proizvodi,int broj_proizvoda,double* kolicina);
+void obrisiProizvode(PROIZVOD* proizvodi,int broj_proizvoda,double* kolicina); //BRISE NIZ PROIZVODA I NJIHOVE KOLICINE
 
 
 
@@ -47,8 +45,8 @@ void radnikMeni();
 
     //admin + radnik opcije
         void evidencijaRobe(char);
-        void pregledPodatakaKupca(); //pregled podataka o kupcu
-        void pregledProizvod(); //pregled podataka za odredjeni proizvod
+        void pregledPodatakaKupca(); //PREGLED PODATAKA O KUPCU
+        void pregledProizvod(); //PREGLED PODATAKA ZA ODREDJENI PROIZVOD
         void pregledStanjaMjesec();
         void citanjeRacuna();
 
@@ -59,5 +57,6 @@ void adminMeniGrafika();
 void radnikMeniGrafika();
 void pristupNalogGrafika();
 void izlazGrafika();
+void trenutneOpcijeGrafika();
 
 #endif // SISTEM_H_INCLUDED

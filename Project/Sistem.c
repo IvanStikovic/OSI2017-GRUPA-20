@@ -1,6 +1,7 @@
 #include "Sistem.h"
 
 VALUTA valuta= {"KM",1}; // PODRAZUMIJEVANA VALUTA
+char korisnik[20]; //ULOGOVANI KORISNIK
 
 void sistemStart()
 {
@@ -8,15 +9,11 @@ void sistemStart()
     remove("ERROR.txt");
     remove("SKLADISTE.txt");
     uveziRacune();
-    //loadingGrafika();
+    loadingGrafika();
     if((c=login()))
         optionMeni(c);
-    else
-    {
-        izlazGrafika();
-        return;
-    }
     izlazGrafika();
+
 }
 
 char login()
@@ -58,7 +55,10 @@ char login()
             }
         }
         if((r_mjesto=provjeriNalog(username,pin)))
+        {
+            strcpy(korisnik,username);
             return r_mjesto;
+        }
         else
         {
             printf("\nPogresan username ili sifra !!!");
@@ -192,26 +192,31 @@ void radnikMeni() //Dane ZAVRSENO!!! TREBA PREGLEDATI
     char c;
     do
     {
-        system("cls");
         radnikMeniGrafika();
         fflush(stdin);
         scanf("%c",&c);
+        system("cls");
         switch(c)
         {
         case '1':
             evidencijaRobe('0');
+            printf("\n\n\n");
             break;
         case '2':
             pregledPodatakaKupca();
+            printf("\n\n\n");
             break;
         case '3':
             evidencijaRobe('p');
+            printf("\n\n\n");
             break;
         case '4':
             evidencijaRacuna();
+            printf("\n\n\n");
             break;
         case '5':
             pregledStanjaMjesec();
+            printf("\n\n\n");
             break;
         case '0':
             break;
@@ -515,7 +520,7 @@ void pisiRadnike()
             printf("Analiticar\n");
 
     }
-    printf("======================================================================\n");
+    printf("========================================================================\n");
 }
 
 
@@ -548,7 +553,7 @@ void brisiNalog()
     return ;
 }
 
-//FUNKCIJA AZUIRRA ODREDJENI NALOG U FAJLU
+//FUNKCIJA AZURIRA ODREDJENI NALOG U FAJLU
 void azurirajNalog()
 {
     FILE *dat;
@@ -584,7 +589,7 @@ void azurirajNalog()
             printf("Unesite pin:");
             scanf("%s",pin);
             fflush(stdin);
-            printf("Unesite radno mjesto:");
+            printf("Unesite radno mjesto( a(admin) ili r(analiticar):");
             scanf("%c",&radno_mjesto);
             pom1++;
             obrisiRadnika(radnici[i]);
@@ -615,15 +620,16 @@ void azurirajNalog()
 void adminMeniGrafika()
 {
     printf(" Dobrodosli u administratorski meni\n");
+    trenutneOpcijeGrafika();
     printf("Molimo unesite broj opcije koju zelite:\n ");
     printf("             MENI:             \n");
     printf("1.Pristup korisnickim nalozima\n");
     printf("2.Pristup evidenciji zaposlenih\n");
-    printf("3.Evidencija robe --- RIJETKO PUKNE\n");
+    printf("3.Evidencija robe \n");
     printf("4.Evidencija racuna\n");
     printf("5.Prikaz kursne liste\n");
     printf("6.Pregled podataka o kupcu\n");
-    printf("7.Pregled proizvoda --- RIJETKO PUKNE\n");
+    printf("7.Pregled proizvoda\n");
     printf("8.Mjesecni presjek \n");
     printf("----------------------------------------\n");
     printf("IZLAZ('0')\n");
@@ -633,13 +639,14 @@ void adminMeniGrafika()
 void radnikMeniGrafika()
 {
     printf("Dobrodosli u analiticki meni!\n");
+    trenutneOpcijeGrafika();
     printf("Molimo vas unesite broj opcije koju zelite: \n");
     printf("         MENI:        \n");
-    printf("1.Evidencija robe --- DOLAZI NA SLJEDECEM UPDATE-u\n");
-    printf("2.Pregled podataka o kupcu --- DOLAZI NA SLJEDECEM UPDATE-u\n");
-    printf("3.Pregled proizvod --- DOLAZI NA SLJEDECEM UPDATE-u\n");
+    printf("1.Evidencija robe\n");
+    printf("2.Pregled podataka o kupcu\n");
+    printf("3.Pregled proizvod\n");
     printf("4.Evidencija racuna\n");
-    printf("5.Mjesecni presjek --- DOLAZI NA SLJEDECEM UPDATE-u\n");
+    printf("5.Mjesecni presjek \n");
     printf("------------------------------------------------\n");
     printf("IZLAZ('0')");
     printf("\n\nVas izbor :");
@@ -786,7 +793,10 @@ void izlazGrafika()
         Sleep(100);
     }
     printf("!");
+}
 
-
-    //IGAC OVDE UBACI
+void trenutneOpcijeGrafika()
+{
+    printf("\nTrenutni ulogovani korisnik je : %s",korisnik);
+    printf("\nTrenutna valuta je : %s\n\n",valuta.oznaka);
 }

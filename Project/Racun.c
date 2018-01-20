@@ -24,8 +24,8 @@ void uveziRacune()
             sacuvajRacun(pom,c);
         else if((pom=format4(file->d_name,&c)))
             sacuvajRacun(pom,c);
-        //  else if((pom=format5(file->d_name,&c)))
-        //      sacuvajRacun(pom,c);
+        else if((pom=format5(file->d_name,&c)))
+            sacuvajRacun(pom,c);
         else if((pom && c=='0'))
             obrisiRacun(&pom);
     }
@@ -111,8 +111,9 @@ RACUN* format1(char* file,char* c)
             sum+=ukupno;
             br++;
         }
+
         fscanf(dat,"%s %lf",pomString,&ukupno);
-        if(ukupno==sum)
+        if(ukupno==sum && ukupno)
         {
             *c='s';
             fclose(dat);
@@ -170,7 +171,7 @@ RACUN* format2(char* file,char* c)
         for(i=0 ; i<2 ; i++)
             fgets(pomString,100,dat);
         fscanf(dat,"%s %d/%d/%d\n",pomString,&pomRacun->datum.dan,&pomRacun->datum.mjesec,&pomRacun->datum.godina);
-        if(sum == ukupno)
+        if(sum == ukupno && ukupno)
         {
             *c='s';
             fclose(dat);
@@ -224,7 +225,7 @@ RACUN* format3(char* file,char* c)
             br++;
         }
         fscanf(dat,"%s %lf",pomString, &ukupno);
-        if(sum == ukupno)
+        if(sum == ukupno && ukupno)
         {
             *c='s';
             fclose(dat);
@@ -279,7 +280,7 @@ RACUN* format4(char* file,char* c)
             br++;
         }
         fscanf(dat,"%s %lf",pomString,&ukupno);
-        if(ukupno==sum)
+        if(ukupno==sum && ukupno)
         {
             *c='s';
             fclose(dat);

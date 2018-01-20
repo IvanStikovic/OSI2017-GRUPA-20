@@ -1,2 +1,2 @@
-Marek Hamsik 216161.000000 prika 1234 a
-Ivan Stikovic 1241.000000 ivans 4298 a
+Marek Hamsik 1500.000000 prika 1234 a
+Prika Prikic 800.000000 prikaRadnik 1234 r
